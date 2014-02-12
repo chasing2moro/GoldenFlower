@@ -1,0 +1,546 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CD2C1A771845C39F00722163 /* CommonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CD2C1A761845C39F00722163 /* CommonHelper.m */; };
+		CD2C1A7A1845C3DF00722163 /* InAppPurchaseManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD2C1A791845C3DF00722163 /* InAppPurchaseManager.mm */; };
+		CD599F8118404AD00069F16D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD599F8018404AD00069F16D /* Foundation.framework */; };
+		CD599F8318404AD00069F16D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD599F8218404AD00069F16D /* CoreGraphics.framework */; };
+		CD599F8518404AD00069F16D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD599F8418404AD00069F16D /* UIKit.framework */; };
+		CD599F8B18404AD00069F16D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD599F8918404AD00069F16D /* InfoPlist.strings */; };
+		CD599F8D18404AD00069F16D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD599F8C18404AD00069F16D /* main.m */; };
+		CD599F9118404AD00069F16D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD599F9018404AD00069F16D /* AppDelegate.m */; };
+		CD599F9418404AD00069F16D /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD599F9218404AD00069F16D /* Main_iPhone.storyboard */; };
+		CD599F9718404AD00069F16D /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD599F9518404AD00069F16D /* Main_iPad.storyboard */; };
+		CD599F9A18404AD00069F16D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD599F9918404AD00069F16D /* ViewController.m */; };
+		CD599F9C18404AD00069F16D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD599F9B18404AD00069F16D /* Images.xcassets */; };
+		CD599FA318404AD00069F16D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD599FA218404AD00069F16D /* XCTest.framework */; };
+		CD599FA418404AD00069F16D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD599F8018404AD00069F16D /* Foundation.framework */; };
+		CD599FA518404AD00069F16D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD599F8418404AD00069F16D /* UIKit.framework */; };
+		CD599FAD18404AD10069F16D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD599FAB18404AD10069F16D /* InfoPlist.strings */; };
+		CD599FAF18404AD10069F16D /* AdBannerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CD599FAE18404AD10069F16D /* AdBannerDemoTests.m */; };
+		CD599FB918404AF60069F16D /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD599FB818404AF60069F16D /* iAd.framework */; };
+		CDDBD56818484CCC002DE085 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDBD56718484CCC002DE085 /* StoreKit.framework */; };
+		CDF0769718434BA20043E287 /* ipsums.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDF0769618434BA20043E287 /* ipsums.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CD599FA618404AD00069F16D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD599F7518404AD00069F16D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD599F7C18404AD00069F16D;
+			remoteInfo = AdBannerDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CD2C1A741845C39F00722163 /* ARCSingletonTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCSingletonTemplate.h; sourceTree = "<group>"; };
+		CD2C1A751845C39F00722163 /* CommonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonHelper.h; sourceTree = "<group>"; };
+		CD2C1A761845C39F00722163 /* CommonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonHelper.m; sourceTree = "<group>"; };
+		CD2C1A781845C3DF00722163 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
+		CD2C1A791845C3DF00722163 /* InAppPurchaseManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InAppPurchaseManager.mm; sourceTree = "<group>"; };
+		CD599F7D18404AD00069F16D /* AdBannerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdBannerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD599F8018404AD00069F16D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CD599F8218404AD00069F16D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CD599F8418404AD00069F16D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CD599F8818404AD00069F16D /* AdBannerDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AdBannerDemo-Info.plist"; sourceTree = "<group>"; };
+		CD599F8A18404AD00069F16D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CD599F8C18404AD00069F16D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CD599F8E18404AD00069F16D /* AdBannerDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AdBannerDemo-Prefix.pch"; sourceTree = "<group>"; };
+		CD599F8F18404AD00069F16D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CD599F9018404AD00069F16D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CD599F9318404AD00069F16D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		CD599F9618404AD00069F16D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		CD599F9818404AD00069F16D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CD599F9918404AD00069F16D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CD599F9B18404AD00069F16D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CD599FA118404AD00069F16D /* AdBannerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AdBannerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD599FA218404AD00069F16D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CD599FAA18404AD00069F16D /* AdBannerDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AdBannerDemoTests-Info.plist"; sourceTree = "<group>"; };
+		CD599FAC18404AD10069F16D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CD599FAE18404AD10069F16D /* AdBannerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdBannerDemoTests.m; sourceTree = "<group>"; };
+		CD599FB818404AF60069F16D /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		CDDBD5661848435C002DE085 /* AdBannerDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = AdBannerDemo.entitlements; sourceTree = "<group>"; };
+		CDDBD56718484CCC002DE085 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		CDF0769618434BA20043E287 /* ipsums.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ipsums.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD599F7A18404AD00069F16D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD599FB918404AF60069F16D /* iAd.framework in Frameworks */,
+				CD599F8318404AD00069F16D /* CoreGraphics.framework in Frameworks */,
+				CDDBD56818484CCC002DE085 /* StoreKit.framework in Frameworks */,
+				CD599F8518404AD00069F16D /* UIKit.framework in Frameworks */,
+				CD599F8118404AD00069F16D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD599F9E18404AD00069F16D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD599FA318404AD00069F16D /* XCTest.framework in Frameworks */,
+				CD599FA518404AD00069F16D /* UIKit.framework in Frameworks */,
+				CD599FA418404AD00069F16D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CD2C1A731845C38C00722163 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CD2C1A781845C3DF00722163 /* InAppPurchaseManager.h */,
+				CD2C1A791845C3DF00722163 /* InAppPurchaseManager.mm */,
+				CD2C1A741845C39F00722163 /* ARCSingletonTemplate.h */,
+				CD2C1A751845C39F00722163 /* CommonHelper.h */,
+				CD2C1A761845C39F00722163 /* CommonHelper.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		CD599F7418404AD00069F16D = {
+			isa = PBXGroup;
+			children = (
+				CD599F8618404AD00069F16D /* AdBannerDemo */,
+				CD599FA818404AD00069F16D /* AdBannerDemoTests */,
+				CD599F7F18404AD00069F16D /* Frameworks */,
+				CD599F7E18404AD00069F16D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CD599F7E18404AD00069F16D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD599F7D18404AD00069F16D /* AdBannerDemo.app */,
+				CD599FA118404AD00069F16D /* AdBannerDemoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD599F7F18404AD00069F16D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDDBD56718484CCC002DE085 /* StoreKit.framework */,
+				CD599FB818404AF60069F16D /* iAd.framework */,
+				CD599F8018404AD00069F16D /* Foundation.framework */,
+				CD599F8218404AD00069F16D /* CoreGraphics.framework */,
+				CD599F8418404AD00069F16D /* UIKit.framework */,
+				CD599FA218404AD00069F16D /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD599F8618404AD00069F16D /* AdBannerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				CDDBD5661848435C002DE085 /* AdBannerDemo.entitlements */,
+				CD2C1A731845C38C00722163 /* Utils */,
+				CD599F8F18404AD00069F16D /* AppDelegate.h */,
+				CD599F9018404AD00069F16D /* AppDelegate.m */,
+				CD599F9218404AD00069F16D /* Main_iPhone.storyboard */,
+				CD599F9518404AD00069F16D /* Main_iPad.storyboard */,
+				CD599F9818404AD00069F16D /* ViewController.h */,
+				CD599F9918404AD00069F16D /* ViewController.m */,
+				CD599F9B18404AD00069F16D /* Images.xcassets */,
+				CD599F8718404AD00069F16D /* Supporting Files */,
+			);
+			path = AdBannerDemo;
+			sourceTree = "<group>";
+		};
+		CD599F8718404AD00069F16D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CD599F8818404AD00069F16D /* AdBannerDemo-Info.plist */,
+				CD599F8918404AD00069F16D /* InfoPlist.strings */,
+				CDF0769618434BA20043E287 /* ipsums.plist */,
+				CD599F8C18404AD00069F16D /* main.m */,
+				CD599F8E18404AD00069F16D /* AdBannerDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD599FA818404AD00069F16D /* AdBannerDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				CD599FAE18404AD10069F16D /* AdBannerDemoTests.m */,
+				CD599FA918404AD00069F16D /* Supporting Files */,
+			);
+			path = AdBannerDemoTests;
+			sourceTree = "<group>";
+		};
+		CD599FA918404AD00069F16D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CD599FAA18404AD00069F16D /* AdBannerDemoTests-Info.plist */,
+				CD599FAB18404AD10069F16D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CD599F7C18404AD00069F16D /* AdBannerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD599FB218404AD10069F16D /* Build configuration list for PBXNativeTarget "AdBannerDemo" */;
+			buildPhases = (
+				CD599F7918404AD00069F16D /* Sources */,
+				CD599F7A18404AD00069F16D /* Frameworks */,
+				CD599F7B18404AD00069F16D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdBannerDemo;
+			productName = AdBannerDemo;
+			productReference = CD599F7D18404AD00069F16D /* AdBannerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CD599FA018404AD00069F16D /* AdBannerDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD599FB518404AD10069F16D /* Build configuration list for PBXNativeTarget "AdBannerDemoTests" */;
+			buildPhases = (
+				CD599F9D18404AD00069F16D /* Sources */,
+				CD599F9E18404AD00069F16D /* Frameworks */,
+				CD599F9F18404AD00069F16D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD599FA718404AD00069F16D /* PBXTargetDependency */,
+			);
+			name = AdBannerDemoTests;
+			productName = AdBannerDemoTests;
+			productReference = CD599FA118404AD00069F16D /* AdBannerDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CD599F7518404AD00069F16D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = bobo;
+				TargetAttributes = {
+					CD599F7C18404AD00069F16D = {
+						DevelopmentTeam = BMJ6MGK57B;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					CD599FA018404AD00069F16D = {
+						TestTargetID = CD599F7C18404AD00069F16D;
+					};
+				};
+			};
+			buildConfigurationList = CD599F7818404AD00069F16D /* Build configuration list for PBXProject "AdBannerDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CD599F7418404AD00069F16D;
+			productRefGroup = CD599F7E18404AD00069F16D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CD599F7C18404AD00069F16D /* AdBannerDemo */,
+				CD599FA018404AD00069F16D /* AdBannerDemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CD599F7B18404AD00069F16D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDF0769718434BA20043E287 /* ipsums.plist in Resources */,
+				CD599F9718404AD00069F16D /* Main_iPad.storyboard in Resources */,
+				CD599F9C18404AD00069F16D /* Images.xcassets in Resources */,
+				CD599F9418404AD00069F16D /* Main_iPhone.storyboard in Resources */,
+				CD599F8B18404AD00069F16D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD599F9F18404AD00069F16D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD599FAD18404AD10069F16D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD599F7918404AD00069F16D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD599F9A18404AD00069F16D /* ViewController.m in Sources */,
+				CD599F9118404AD00069F16D /* AppDelegate.m in Sources */,
+				CD2C1A7A1845C3DF00722163 /* InAppPurchaseManager.mm in Sources */,
+				CD2C1A771845C39F00722163 /* CommonHelper.m in Sources */,
+				CD599F8D18404AD00069F16D /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD599F9D18404AD00069F16D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD599FAF18404AD10069F16D /* AdBannerDemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CD599FA718404AD00069F16D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD599F7C18404AD00069F16D /* AdBannerDemo */;
+			targetProxy = CD599FA618404AD00069F16D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CD599F8918404AD00069F16D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD599F8A18404AD00069F16D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CD599F9218404AD00069F16D /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD599F9318404AD00069F16D /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		CD599F9518404AD00069F16D /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD599F9618404AD00069F16D /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		CD599FAB18404AD10069F16D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD599FAC18404AD10069F16D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CD599FB018404AD10069F16D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CD599FB118404AD10069F16D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CD599FB318404AD10069F16D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = AdBannerDemo/AdBannerDemo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AdBannerDemo/AdBannerDemo-Prefix.pch";
+				INFOPLIST_FILE = "AdBannerDemo/AdBannerDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CD599FB418404AD10069F16D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = AdBannerDemo/AdBannerDemo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AdBannerDemo/AdBannerDemo-Prefix.pch";
+				INFOPLIST_FILE = "AdBannerDemo/AdBannerDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CD599FB618404AD10069F16D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AdBannerDemo.app/AdBannerDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AdBannerDemo/AdBannerDemo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "AdBannerDemoTests/AdBannerDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CD599FB718404AD10069F16D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/AdBannerDemo.app/AdBannerDemo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AdBannerDemo/AdBannerDemo-Prefix.pch";
+				INFOPLIST_FILE = "AdBannerDemoTests/AdBannerDemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD599F7818404AD00069F16D /* Build configuration list for PBXProject "AdBannerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD599FB018404AD10069F16D /* Debug */,
+				CD599FB118404AD10069F16D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD599FB218404AD10069F16D /* Build configuration list for PBXNativeTarget "AdBannerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD599FB318404AD10069F16D /* Debug */,
+				CD599FB418404AD10069F16D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD599FB518404AD10069F16D /* Build configuration list for PBXNativeTarget "AdBannerDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD599FB618404AD10069F16D /* Debug */,
+				CD599FB718404AD10069F16D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD599F7518404AD00069F16D /* Project object */;
+}

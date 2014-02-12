@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Dln-Lm-egO"/>
+                        <viewControllerLayoutGuide type="bottom" id="0U1-Cp-Pz0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dm1-bv-bMy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lj5-Cd-PZb">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:0:0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SCW-zR-XbX">
+                                        <rect key="frame" x="71" y="20" width="179" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A1n-tQ-cnR">
+                                        <rect key="frame" x="0.0" y="58" width="320" height="510"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="A1n-tQ-cnR" firstAttribute="leading" secondItem="Lj5-Cd-PZb" secondAttribute="leading" id="RG0-wM-l29"/>
+                                    <constraint firstItem="SCW-zR-XbX" firstAttribute="leading" secondItem="Lj5-Cd-PZb" secondAttribute="leading" constant="71" id="RiL-CX-r36"/>
+                                    <constraint firstAttribute="trailing" secondItem="SCW-zR-XbX" secondAttribute="trailing" constant="70" id="WlR-Uc-Zk9"/>
+                                    <constraint firstItem="A1n-tQ-cnR" firstAttribute="top" secondItem="SCW-zR-XbX" secondAttribute="bottom" constant="17" id="bZb-G1-oqv"/>
+                                    <constraint firstItem="SCW-zR-XbX" firstAttribute="top" secondItem="Lj5-Cd-PZb" secondAttribute="top" constant="20" id="dBL-2W-foT"/>
+                                    <constraint firstAttribute="bottom" secondItem="A1n-tQ-cnR" secondAttribute="bottom" id="hvG-V1-biC"/>
+                                    <constraint firstAttribute="trailing" secondItem="A1n-tQ-cnR" secondAttribute="trailing" id="qTW-5D-uGq"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lj5-Cd-PZb" firstAttribute="leading" secondItem="dm1-bv-bMy" secondAttribute="leading" id="4ba-Vu-aJ2"/>
+                            <constraint firstItem="Lj5-Cd-PZb" firstAttribute="top" secondItem="dm1-bv-bMy" secondAttribute="top" id="blO-7G-Op4"/>
+                            <constraint firstAttribute="trailing" secondItem="Lj5-Cd-PZb" secondAttribute="trailing" id="f4x-v7-E0g"/>
+                            <constraint firstAttribute="bottom" secondItem="Lj5-Cd-PZb" secondAttribute="bottom" id="gqL-YS-kB9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="contentView" destination="Lj5-Cd-PZb" id="9HI-z7-Pea"/>
+                        <outlet property="textView" destination="A1n-tQ-cnR" id="gSb-jg-G5s"/>
+                        <outlet property="timerLabel" destination="SCW-zR-XbX" id="ON4-jm-33A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
