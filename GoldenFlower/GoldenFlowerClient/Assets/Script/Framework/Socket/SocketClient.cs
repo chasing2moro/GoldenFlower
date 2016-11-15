@@ -18,7 +18,13 @@ public class SocketClient : MonoBehaviour
     [ContextMenu("Connect")]
     void _connect()
     {
-        Connect();
+        string header = UtilityMsg.GetHeaderByCommandName(CommandName.ECHO);
+        Debug.Log("header:" + header);
+
+        string command = UtilityMsg.GetCommandNameByHeader(header);
+        Debug.Log("command:" + command);
+
+         Connect();
     }
 
     [ContextMenu("Send")]
@@ -39,27 +45,38 @@ public class SocketClient : MonoBehaviour
 
 
         System.IO.MemoryStream stream = new System.IO.MemoryStream();
+
+
+        //包名长
+        // Debug.Log("包名 长度：" + backageName.Length);
+        //  if (backageName.Length > byte.MaxValue)
+        //     Debug.LogError("报名长度只支持255，你的包名长度：" + backageName.Length);
+        // stream.WriteByte((byte)backageName.Length);
+
         //包名
-        byte[] backageName = Encoding.ASCII.GetBytes("ECHO");
+        byte[] backageName = Encoding.ASCII.GetBytes(UtilityMsg.GetHeaderByCommandName(CommandName.ADD));
         Debug.Log("包名 长度：" + backageName.Length);
         stream.Write(backageName, 0, backageName.Length);
 
         byte[] backageBody = UtilityProbuff.Serialize(protoexample);
 
-        //包长
+        //包体长
+        Debug.Log("包体Header 长度：" + 4);
         stream.Write(new byte[] { (byte)(backageBody.Length / 256), (byte)(backageBody.Length % 256) }, 0, 2);
 
         //包体
+        Debug.Log("包体 长度：" + backageBody.Length);
         stream.Write(backageBody, 0, backageBody.Length);
 
 
         byte[] sendbyte = new byte[stream.Length];
         Array.Copy(stream.GetBuffer(), sendbyte, stream.Length);
 
+        Debug.Log("整包 长度：" + sendbyte.Length);
         string str = "";
         for (int i = 0; i < sendbyte.Length; i++)
         {
-            str += ":" + sendbyte[i];
+            str += "[" + i + "]:" + sendbyte[i];
         }
         Debug.Log("send" + str);
 

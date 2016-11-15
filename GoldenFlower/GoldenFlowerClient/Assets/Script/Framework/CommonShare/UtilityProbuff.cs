@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// 客户端和服务器公用
+/// </summary>
 public class UtilityProbuff
 {
     static ProtoBuf.Meta.RuntimeTypeModel serializer;
 
     //获取解析器
-    public static ProtoBuf.Meta.RuntimeTypeModel GetSerializer()
+    static ProtoBuf.Meta.RuntimeTypeModel GetSerializer()
     {
         if(serializer == null)
             serializer = ProbuffProtocolSerializer.Create();
