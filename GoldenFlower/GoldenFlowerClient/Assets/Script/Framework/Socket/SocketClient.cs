@@ -27,8 +27,14 @@ public class SocketClient : MonoBehaviour
          Connect();
     }
 
+    public CommandName m_CommandName;
     [ContextMenu("Send")]
-    void _send()
+    void __send() {
+        _send(m_CommandName);
+    }
+
+
+    void _send(CommandName VCommandName)
     {
        
         //socketStream.Write(requestNameData, 0, requestNameData.Length);
@@ -37,7 +43,7 @@ public class SocketClient : MonoBehaviour
         ProtoBuf.Meta.RuntimeTypeModel serializer = ProbuffProtocolSerializer.Create();
 
         defaultproto.example protoexample = new defaultproto.example();
-        protoexample.name = "name1";
+        protoexample.name = VCommandName.ToString();
         protoexample.field.Add(1);
         protoexample.field.Add(2);
         protoexample.gender = 1;
@@ -54,7 +60,7 @@ public class SocketClient : MonoBehaviour
         // stream.WriteByte((byte)backageName.Length);
 
         //包名
-        byte[] backageName = Encoding.ASCII.GetBytes(UtilityMsg.GetHeaderByCommandName(CommandName.ADD));
+        byte[] backageName = Encoding.ASCII.GetBytes(UtilityMsg.GetHeaderByCommandName(VCommandName));
         Debug.Log("包名 长度：" + backageName.Length);
         stream.Write(backageName, 0, backageName.Length);
 
