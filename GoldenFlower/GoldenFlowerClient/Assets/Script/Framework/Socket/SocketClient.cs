@@ -41,6 +41,7 @@ public class SocketClient : MonoBehaviour
         System.IO.MemoryStream stream = new System.IO.MemoryStream();
         //包名
         byte[] backageName = Encoding.ASCII.GetBytes("ECHO");
+        Debug.Log("包名 长度：" + backageName.Length);
         stream.Write(backageName, 0, backageName.Length);
 
         byte[] backageBody = UtilityProbuff.Serialize(protoexample);
