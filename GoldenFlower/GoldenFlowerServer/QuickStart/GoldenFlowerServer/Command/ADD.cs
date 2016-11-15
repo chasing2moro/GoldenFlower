@@ -1,13 +1,12 @@
-﻿using System;
+﻿using SuperSocket.SocketBase.Protocol;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using SuperSocket.SocketBase.Command;
-using SuperSocket.SocketBase.Protocol;
 
 namespace SuperSocket.QuickStart.CustomProtocol.Command
 {
-    public class ECHO : MyCommandBase
+    public class ADD : MyCommandBase
     {
         public override void ExecuteCommand(CustomProtocolSession session, BinaryRequestInfo requestInfo)
         {
@@ -24,7 +23,7 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             // session.Send(requestInfo.Body, 0, requestInfo.Body.Length);
 
             defaultproto.account protoAccount = new defaultproto.account();
-            protoAccount.name = "name acount Echo";
+            protoAccount.name = "name acount Add";
             byte[] byteAcount = UtilityProbuff.Serialize(protoAccount);
             session.Send(byteAcount, 0, byteAcount.Length);
         }

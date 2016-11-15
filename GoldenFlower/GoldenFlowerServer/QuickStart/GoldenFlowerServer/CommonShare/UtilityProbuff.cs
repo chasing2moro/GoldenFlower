@@ -2,14 +2,17 @@
 using System;
 using System.Collections.Generic;
 
+/// <summary>
+/// 客户端和服务器公用
+/// </summary>
 public class UtilityProbuff
 {
     static ProtoBuf.Meta.RuntimeTypeModel serializer;
 
     //获取解析器
-    public static ProtoBuf.Meta.RuntimeTypeModel GetSerializer()
+    static ProtoBuf.Meta.RuntimeTypeModel GetSerializer()
     {
-        if (serializer == null)
+        if(serializer == null)
             serializer = ProbuffProtocolSerializer.Create();
         return serializer;
     }
@@ -25,7 +28,7 @@ public class UtilityProbuff
         return data;
     }
 
-    public static T DeSerialize<T>(byte[] vData) where T : new()
+    public static T DeSerialize<T>(byte[] vData) where T: new()
     {
         System.IO.MemoryStream s1 = new System.IO.MemoryStream(vData);
         T proto = new T();

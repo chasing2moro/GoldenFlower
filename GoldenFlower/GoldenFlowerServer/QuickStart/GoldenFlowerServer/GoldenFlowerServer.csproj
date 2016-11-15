@@ -60,14 +60,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\ADD.cs" />
     <Compile Include="Command\ECHO.cs" />
+    <Compile Include="Command\MyCommandBase.cs" />
+    <Compile Include="CommonShare\CommandName.cs" />
+    <Compile Include="CommonShare\UtilityMsg.cs" />
     <Compile Include="CustomProtocolServer.cs" />
     <Compile Include="CustomProtocolServerTest.cs" />
     <Compile Include="CustomProtocolSession.cs" />
     <Compile Include="MyReceiveFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility\UtilityProbuff.cs" />
+    <Compile Include="CommonShare\UtilityProbuff.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SuperSocket.SocketService.exe.config">
