@@ -15,90 +15,39 @@ using UnityEngine;
  */
 public class SocketClient : MonoBehaviour
 {
-    [ContextMenu("Connect")]
-    void _connect()
+    
+    private Queue<byte[]> _recByteQueue;
+    private SocketParser _parser;
+    void Awake()
     {
-        string header = UtilityMsg.GetHeaderByCommandName(CommandName.ECHO);
-        Debug.Log("header:" + header);
-
-        string command = UtilityMsg.GetCommandNameByHeader(header);
-        Debug.Log("command:" + command);
-
-         Connect();
+        _recByteQueue = new Queue<byte[]>();
+        _parser = new SocketParser();
     }
 
-    public CommandName m_CommandName;
-    [ContextMenu("Send")]
-    void __send() {
-        _send(m_CommandName);
-    }
-
-
-    void _send(CommandName VCommandName)
+    void Update()
     {
-       
-        //socketStream.Write(requestNameData, 0, requestNameData.Length);
-        //var data = Encoding.ASCII.GetBytes(currentMessage);
-       // #region Probuff
-        ProtoBuf.Meta.RuntimeTypeModel serializer = ProbuffProtocolSerializer.Create();
-
-        defaultproto.example protoexample = new defaultproto.example();
-        protoexample.name = VCommandName.ToString();
-        protoexample.field.Add(1);
-        protoexample.field.Add(2);
-        protoexample.gender = 1;
-        protoexample.year = 30;
-
-
-        System.IO.MemoryStream stream = new System.IO.MemoryStream();
-
-
-        //包名长
-        // Debug.Log("包名 长度：" + backageName.Length);
-        //  if (backageName.Length > byte.MaxValue)
-        //     Debug.LogError("报名长度只支持255，你的包名长度：" + backageName.Length);
-        // stream.WriteByte((byte)backageName.Length);
-
-        //包名
-        byte[] backageName = Encoding.ASCII.GetBytes(UtilityMsg.GetHeaderByCommandName(VCommandName));
-        Debug.Log("包名 长度：" + backageName.Length);
-        stream.Write(backageName, 0, backageName.Length);
-
-        byte[] backageBody = UtilityProbuff.Serialize(protoexample);
-
-        //包体长
-        Debug.Log("包体Header 长度：" + 4);
-        stream.Write(new byte[] { (byte)(backageBody.Length / 256), (byte)(backageBody.Length % 256) }, 0, 2);
-
-        //包体
-        Debug.Log("包体 长度：" + backageBody.Length);
-        stream.Write(backageBody, 0, backageBody.Length);
-
-
-        byte[] sendbyte = new byte[stream.Length];
-        Array.Copy(stream.GetBuffer(), sendbyte, stream.Length);
-
-        Debug.Log("整包 长度：" + sendbyte.Length);
-        string str = "";
-        for (int i = 0; i < sendbyte.Length; i++)
+        if(_recByteQueue.Count > 0)
         {
-            str += "[" + i + "]:" + sendbyte[i];
+           byte[] recByte = _recByteQueue.Dequeue();
+
+#if true
+            string str = "";
+            for (int i = 0; i < recByte.Length; i++)
+            {
+                str += ":" + recByte[i];
+            }
+            Debug.Log("recv" + str);
+#endif
+            //解析网络byte
+            _parser.Parser(recByte);
         }
-        Debug.Log("send" + str);
-
-        Send(sendbyte);
-    }
-
-    void _recv()
-    {
-
     }
 
     public string m_IP = "127.0.0.1";
     public int m_Port = 8000;
     private Socket socket;
     private IAsyncResult recAsyncResult;
-    void Connect()
+    public void Connect()
     {
 
         //采用TCP方式连接
@@ -136,7 +85,7 @@ public class SocketClient : MonoBehaviour
         }
     }
 
-    protected void Send(byte[] data)
+    public void Send(byte[] data)
     {
         try
         {
@@ -189,23 +138,8 @@ public class SocketClient : MonoBehaviour
                 byte[] trueByte = new byte[len];
                 Array.Copy(buf, trueByte, len);
 
-                string str = "";
-                for (int i = 0; i < trueByte.Length; i++)
-                {
-                    str += ":" + trueByte[i];
-                }
-                Debug.Log("recv" + str);
-
-
-                // defaultproto.example protoExample = UtilityProbuff.DeSerialize<defaultproto.example>(trueByte);
-                // Debug.Log(protoExample.name);
-                // Debug.Log(protoExample.field[0]);
-                // Debug.Log(protoExample.field[1]);
-                // Debug.Log(protoExample.gender);
-                // Debug.Log(protoExample.year);
-
-                defaultproto.account protoAcount = UtilityProbuff.DeSerialize<defaultproto.account>(trueByte);
-                Debug.Log(protoAcount.name);
+                //缓存起来
+                _recByteQueue.Enqueue(trueByte);
             }
 
 

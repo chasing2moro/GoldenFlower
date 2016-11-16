@@ -33,6 +33,14 @@ public class UtilityProbuff
         System.IO.MemoryStream s1 = new System.IO.MemoryStream(vData);
         T proto = new T();
         GetSerializer().Deserialize(s1, proto, typeof(T));
+        return proto;
+    }
+
+    public static object DeSerialize(Type vType, byte[] vData)
+    {
+        System.IO.MemoryStream s1 = new System.IO.MemoryStream(vData);
+        object proto = Activator.CreateInstance(vType);
+        GetSerializer().Deserialize(s1, proto, vType);
 
         return proto;
     }
