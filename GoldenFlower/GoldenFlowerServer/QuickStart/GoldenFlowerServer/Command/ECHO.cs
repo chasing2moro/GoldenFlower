@@ -25,8 +25,7 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
 
             defaultproto.account protoAccount = new defaultproto.account();
             protoAccount.name = "name acount Echo";
-            byte[] byteAcount = UtilityProbuff.Serialize(protoAccount);
-            session.Send(byteAcount, 0, byteAcount.Length);
+            SessionSend(session, protoAccount);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SuperSocket.QuickStart.CustomProtocol.Command
 {
-    public class ADD : MyCommandBase
+    public class MUTL : MyCommandBase
     {
         public override void ExecuteCommand(CustomProtocolSession session, BinaryRequestInfo requestInfo)
         {
@@ -23,7 +23,7 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             // session.Send(requestInfo.Body, 0, requestInfo.Body.Length);
 
             defaultproto.account protoAccount = new defaultproto.account();
-            protoAccount.name = "name acount Add";
+            protoAccount.name = "name acount MUTL---";
             SessionSend(session, protoAccount);
         }
     }

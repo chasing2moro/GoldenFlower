@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Command\ADD.cs" />
     <Compile Include="Command\ECHO.cs" />
+    <Compile Include="Command\MUTL.cs" />
     <Compile Include="Command\MyCommandBase.cs" />
     <Compile Include="CommonShare\CommandName.cs" />
     <Compile Include="CommonShare\UtilityMsg.cs" />
