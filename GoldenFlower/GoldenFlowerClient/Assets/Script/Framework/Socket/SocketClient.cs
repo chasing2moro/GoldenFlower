@@ -131,7 +131,8 @@ public class SocketClient : MonoBehaviour
             byte[] buf = (byte[])vIAsyncResult.AsyncState;
             //socket 字节流长度
             int len = socket.EndReceive(vIAsyncResult);
-            this.recAsyncResult = null;
+            if(this.recAsyncResult != null)
+                this.recAsyncResult = null;
             if (len > 0)
             {
 

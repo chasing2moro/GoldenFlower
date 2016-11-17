@@ -15,27 +15,28 @@ public class Main : MonoBehaviour {
 
     void OnEnable()
     {
-        Facade.Instance.RegistCommand(CommandName.ADD, OnHandleAddCommand);
-        Facade.Instance.RegistCommand(CommandName.ECHO, OnHandleEchoCommand);
-        Facade.Instance.RegistCommand(CommandName.MUTL, OnHandleEchoCommand);
+        Facade.Instance.RegistCommand(CommandName.ADD, OnHandleCommand);
+        Facade.Instance.RegistCommand(CommandName.ECHO, OnHandleCommand);
+        Facade.Instance.RegistCommand(CommandName.MUTL, OnHandleCommand);
     }
 
     void OnDisable()
     {
-        Facade.Instance.UnRegistCommand(CommandName.ADD, OnHandleAddCommand);
-        Facade.Instance.UnRegistCommand(CommandName.ECHO, OnHandleEchoCommand);
-        Facade.Instance.RegistCommand(CommandName.MUTL, OnHandleEchoCommand);
+        Facade.Instance.UnRegistCommand(CommandName.ADD, OnHandleCommand);
+        Facade.Instance.UnRegistCommand(CommandName.ECHO, OnHandleCommand);
+        Facade.Instance.RegistCommand(CommandName.MUTL, OnHandleCommand);
     }
 
-    object OnHandleAddCommand(params object[] args)
+    object OnHandleCommand(params object[] args)
     {
         Debug.Log((args[0] as defaultproto.account).name);
         return null;
     }
-
-    object OnHandleEchoCommand(params object[] args)
+    
+    [ContextMenu("sqlite")]
+    void Sqlite()
     {
-        Debug.Log((args[0] as defaultproto.account).name);
-        return null;
+     
     }
+
 }
