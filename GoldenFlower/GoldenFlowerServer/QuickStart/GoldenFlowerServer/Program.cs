@@ -19,36 +19,16 @@ namespace SuperSocket.QuickStart.TelnetServer
 
         static void Main(string[] args)
         {
-            string dataSource = string.Format("data source={0}", "../Sqlite/goldenflower.db");
-            using (SQLiteConnection conn = new SQLiteConnection(dataSource))
+            UtilityDataBase.Instance.ConnectDatabase();
+            List<DatabaseServer> servers = UtilityDataBase.Instance.ReadFullTable<DatabaseServer>("config_net");
+            foreach (var item in servers)
             {
-                using (SQLiteCommand cmd = new SQLiteCommand())
-                {
-                    conn.Open();
-                    cmd.Connection = conn;
-
-                    SQLiteHelper sh = new SQLiteHelper(cmd);
-
-                    DataTable dt = sh.GetTableStatus();
-
-                    DataTable dt1 = sh.GetTableList();
-
-                    DataTable dt2 = sh.Select("select * from config_net");
-                    string str = "";
-                    foreach (DataRow dr in dt2.Rows)
-                    {
-                        foreach (DataColumn dc in dt2.Columns)
-                        {
-                            str += ":" + dr[dc];
-                        }
-                    }
-                    Console.Write(str);
-                    conn.Close();
-                }
+                Console.WriteLine(item.ip + " " + item.port);
             }
+
             Console.ReadKey();
             return;
-            System.Console.ReadKey();
+     
             CustomProtocolServerTest test = new CustomProtocolServerTest();
             test.Setup();
             test.StartServer();

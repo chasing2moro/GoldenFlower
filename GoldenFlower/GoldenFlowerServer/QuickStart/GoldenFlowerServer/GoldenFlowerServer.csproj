@@ -72,6 +72,10 @@
     <Compile Include="CustomProtocolServer.cs" />
     <Compile Include="CustomProtocolServerTest.cs" />
     <Compile Include="CustomProtocolSession.cs" />
+    <Compile Include="Data\Database\DatabaseField.cs" />
+    <Compile Include="Data\Database\DatabaseRecord.cs" />
+    <Compile Include="Data\Database\DatabaseServer.cs" />
+    <Compile Include="Data\GameConfig.cs" />
     <Compile Include="MyReceiveFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +84,7 @@
     <Compile Include="SQLiteHelper\SQLiteColumnList.cs" />
     <Compile Include="SQLiteHelper\SQLiteHelper.cs" />
     <Compile Include="SQLiteHelper\SQLiteTable.cs" />
+    <Compile Include="Utility\UtilityDataBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SuperSocket.SocketService.exe.config">
@@ -109,6 +114,7 @@
       <Name>SuperSocket.SocketService.Net40</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
