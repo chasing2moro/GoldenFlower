@@ -20,10 +20,18 @@ namespace SuperSocket.QuickStart.TelnetServer
         static void Main(string[] args)
         {
             UtilityDataBase.Instance.ConnectDatabase();
+
             List<DatabaseServer> servers = UtilityDataBase.Instance.ReadFullTable<DatabaseServer>("config_net");
             foreach (var item in servers)
             {
                 Console.WriteLine(item.ip + " " + item.port);
+            }
+
+            //读取数据表中Age>=25的所有记录的ID和Name
+            servers = UtilityDataBase.Instance.ReadTable< DatabaseServer>("config_net", new string[] { "ip", "port" }, new string[] { "port" }, new string[] { "=" }, new string[] { "900" });
+            foreach (var item in servers)
+            {
+                Console.WriteLine(item.ip + " - " + item.port);
             }
 
             Console.ReadKey();
