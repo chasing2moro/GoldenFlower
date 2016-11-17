@@ -94,3 +94,4 @@ D:\Code\UnityProject\GoldenFlower.git\trunk\GoldenFlower\GoldenFlowerServer\Quic
 D:\Code\UnityProject\GoldenFlower.git\trunk\GoldenFlower\GoldenFlowerServer\QuickStart\GoldenFlowerServer\bin\Debug\protobuf-net.pdb
 D:\Code\UnityProject\GoldenFlower.git\trunk\GoldenFlower\GoldenFlowerServer\QuickStart\GoldenFlowerServer\bin\Debug\protobuf-net.xml
 D:\Code\UnityProject\GoldenFlower.git\trunk\GoldenFlower\GoldenFlowerServer\QuickStart\GoldenFlowerServer\obj\Debug\GoldenFlowerServer.csprojResolveAssemblyReference.cache
+D:\Code\UnityProject\GoldenFlower.git\trunk\GoldenFlower\GoldenFlowerServer\QuickStart\GoldenFlowerServer\bin\Debug\System.Data.SQLite.dll
