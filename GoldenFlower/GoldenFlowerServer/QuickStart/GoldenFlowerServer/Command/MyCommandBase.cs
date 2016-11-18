@@ -12,23 +12,42 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
     {
         public override string Name
         {
-            //收到 4个字节的协议头，转成协议Command
-            get {
+            //收到 4个字节的包头，转成协议Command
+            get
+            {
                 return GetHeader();
             }
         }
 
         //0001/0002
+        string _header;
+        /// <summary>
+        /// 包头
+        /// </summary>
+        /// <returns></returns>
         string GetHeader()
         {
-            Type type = this.GetType();
-            CommandName commandName = (CommandName)Enum.Parse(typeof(CommandName), type.Name);
-            return UtilityMsg.GetHeaderByCommandName(commandName);
+            if (string.IsNullOrEmpty(_header))
+            {
+                Type type = this.GetType();
+                CommandName commandName = (CommandName)Enum.Parse(typeof(CommandName), type.Name);
+                _header =  UtilityMsg.GetHeaderByCommandName(commandName);
+            }
+            return _header;
         }
 
+        byte[] _headerByte;
+        /// <summary>
+        /// 包头byte[]
+        /// </summary>
+        /// <returns></returns>
         byte[] GetHeaderByte()
         {
-            return Encoding.UTF8.GetBytes(GetHeader());
+            if (_headerByte.IsNullOrEmpty())
+            {
+                _headerByte = Encoding.UTF8.GetBytes(GetHeader());
+            }
+            return _headerByte;
         }
 
         public override void ExecuteCommand(CustomProtocolSession session, BinaryRequestInfo requestInfo)
@@ -36,14 +55,26 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 封装过的发送接口，所有的发送都经过这里，要不然前端不识别
+        /// </summary>
+        /// <param name="Session"></param>
+        /// <param name="vProto"></param>
         public void SessionSend(CustomProtocolSession Session, IExtensible vProto)
         {
+            //包头
             byte[] byteHeader = GetHeaderByte();
+            //包体
             byte[] byteBody = UtilityProbuff.Serialize(vProto);
-            byte[] byteSend = new byte[byteBody.Length + byteHeader.Length];
 
+            //总包
+            byte[] byteSend = new byte[byteBody.Length + byteHeader.Length];
+            //coy包头
             Array.Copy(byteHeader, 0, byteSend, 0, 4);
+            //copy包体
             Array.Copy(byteBody, 0, byteSend, 4, byteBody.Length);
+
+
             Session.Send(byteSend, 0, byteSend.Length);
         }
     }

@@ -71,6 +71,7 @@
     <Compile Include="CommonShare\Utility\Logger.cs" />
     <Compile Include="CommonShare\Utility\UtilityMsg.cs" />
     <Compile Include="CommonShare\Utility\UtilityProbuff.cs" />
+    <Compile Include="CommonShare\Utility\UtiltyCommon.cs" />
     <Compile Include="CommonShare\XML\Proto\UtilityProto.cs" />
     <Compile Include="CommonShare\XML\Record\RecordRecipe.cs" />
     <Compile Include="CommonShare\XML\XMLParser\XMLField.cs" />
