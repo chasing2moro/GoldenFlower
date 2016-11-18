@@ -67,7 +67,7 @@ public class SocketClient : MonoBehaviour
         if (!success)
         {
             //超时
-            Close();
+            Close("Connect failed");
             Debug.Log("connect Time Out");
         }
     }
@@ -81,7 +81,7 @@ public class SocketClient : MonoBehaviour
         }
         catch (SocketException e)
         {
-            this.Close(e.ErrorCode);
+            this.Close(e.Message);
         }
     }
 
@@ -101,7 +101,7 @@ public class SocketClient : MonoBehaviour
         }
         catch (SocketException e)
         {
-            this.Close(e.ErrorCode);
+            this.Close(e.Message);
         }
     }
 
@@ -149,7 +149,7 @@ public class SocketClient : MonoBehaviour
         }
         catch (SocketException e)
         {
-            this.Close(e.ErrorCode);
+            this.Close(e.Message);
         }
     }
 
@@ -163,14 +163,14 @@ public class SocketClient : MonoBehaviour
         }
         catch (SocketException e)
         {
-            this.Close(e.ErrorCode);
+            this.Close(e.Message);
         }
     }
     
     //关闭Socket
-    public void Close(int vErrorCode = -100)
+    public void Close(string vError = "default")
     {
-        Debug.LogError("socket close" + vErrorCode);
+        Debug.LogError("socket close" + vError);
         if (socket != null && socket.Connected)
         {
             socket.Shutdown(SocketShutdown.Both);

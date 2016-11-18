@@ -38,7 +38,7 @@ public class SocketParser
         }
 
         object proto = UtilityProbuff.DeSerialize(__type, leftByte);
-        Debug.Log(proto.ToString());
+        //Debug.Log(proto.ToString());
         //
         Facade.Instance.SendCommand(__commandName, proto);
     }
