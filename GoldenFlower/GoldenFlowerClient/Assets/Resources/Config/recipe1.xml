@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Root>
+<Info id="4" recipename="Pig4" preptime="10" type="Meat"/>
+<Info id="5" recipename="Shala5" preptime="7" type="Vegetable"/>
+<Info id="6" recipename="Ice Cream6" preptime="5" type="Dessert"/>
+</Root>
