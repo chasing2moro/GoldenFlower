@@ -64,6 +64,26 @@ public class UtilityDataBase
     }
 
     /// <summary>
+    /// 向指定数据表中插入数据
+    /// </summary>
+    /// <returns>The values.</returns>
+    /// <param name="tableName">数据表名称</param>
+    /// <param name="values">插入的数值</param>
+    public int InsertValues<T>(string tableName, T vDatabaseRecord) where T : DatabaseRecord
+    {
+        ////获取数据表中字段数目
+        //int fieldCount = ReadFullTable(tableName).FieldCount;
+        ////当插入的数据长度不等于字段数目时引发异常
+        //if (values.Length != fieldCount)
+        //{
+        //    throw new SqliteException("values.Length!=fieldCount");
+        //}
+        Dictionary<string, object> dic = vDatabaseRecord.GetKeyValuePair();
+
+       return _sqliteHelper.Insert(tableName, dic);
+    }
+
+    /// <summary>
     /// Reads the table.
     /// </summary>
     /// <returns>The table.</returns>

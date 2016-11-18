@@ -214,7 +214,7 @@ namespace System.Data.SQLite
             return data;
         }
 
-        public void Insert(string tableName, Dictionary<string, object> dic)
+        public int Insert(string tableName, Dictionary<string, object> dic)
         {
             StringBuilder sbCol = new System.Text.StringBuilder();
             StringBuilder sbVal = new System.Text.StringBuilder();
@@ -259,7 +259,7 @@ namespace System.Data.SQLite
                 cmd.Parameters.AddWithValue("@v" + kv.Key, kv.Value);
             }
 
-            cmd.ExecuteNonQuery();
+            return cmd.ExecuteNonQuery();
         }
 
         public void Update(string tableName, Dictionary<string, object> dicData, string colCond, object varCond)

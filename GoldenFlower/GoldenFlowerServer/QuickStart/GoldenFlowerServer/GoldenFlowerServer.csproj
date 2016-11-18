@@ -40,17 +40,14 @@
     <Reference Include="nunit.framework">
       <HintPath>..\..\Reference\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="ProbuffProtocol, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Probuff\ProbuffProtocol\bin\Release\ProbuffProtocol.dll</HintPath>
+    <Reference Include="ProbuffProtocol">
+      <HintPath>..\..\..\GoldenFlowerClient\Assets\Plugins\Probuff\ProbuffProtocol.dll</HintPath>
     </Reference>
-    <Reference Include="ProbuffProtocolSerializer, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Probuff\ProbuffProtocol\bin\Release\ProbuffProtocolSerializer.dll</HintPath>
+    <Reference Include="ProbuffProtocolSerializer">
+      <HintPath>..\..\..\GoldenFlowerClient\Assets\Plugins\Probuff\ProbuffProtocolSerializer.dll</HintPath>
     </Reference>
-    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Probuff\ProbuffProtocol\bin\Release\protobuf-net.dll</HintPath>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\..\GoldenFlowerClient\Assets\Plugins\Probuff\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -67,6 +64,7 @@
     <Compile Include="Command\ECHO.cs" />
     <Compile Include="Command\MUTL.cs" />
     <Compile Include="Command\MyCommandBase.cs" />
+    <Compile Include="Command\REGISTER_ACCOUNT.cs" />
     <Compile Include="CommonShare\CommandName.cs" />
     <Compile Include="CommonShare\Utility\Logger.cs" />
     <Compile Include="CommonShare\Utility\UtilityMsg.cs" />
@@ -80,9 +78,10 @@
     <Compile Include="CustomProtocolServer.cs" />
     <Compile Include="CustomProtocolServerTest.cs" />
     <Compile Include="CustomProtocolSession.cs" />
-    <Compile Include="Data\Database\DatabaseField.cs" />
-    <Compile Include="Data\Database\DatabaseRecord.cs" />
+    <Compile Include="Data\Database\Base\DatabaseField.cs" />
+    <Compile Include="Data\Database\Base\DatabaseRecord.cs" />
     <Compile Include="Data\Database\DatabaseServer.cs" />
+    <Compile Include="Data\Database\DataBaseUser.cs" />
     <Compile Include="Data\GameConfig.cs" />
     <Compile Include="MyReceiveFilter.cs" />
     <Compile Include="Program.cs" />

@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Xml;
 using System;
 using System.Data;
+using System.Collections.Generic;
 
 public abstract class DatabaseRecord
 {
@@ -33,4 +34,13 @@ public abstract class DatabaseRecord
 		return false;
 	}
 
+    public Dictionary<string, object> GetKeyValuePair()
+    {
+        Dictionary<string, object> dic = new Dictionary<string, object>();
+        FieldInfo[] fieldInfos = GetFieldInfos();
+        foreach (FieldInfo field in fieldInfos) { 
+            dic[field.Name] = field.GetValue(this);
+        }
+        return dic;
+    }
 }
