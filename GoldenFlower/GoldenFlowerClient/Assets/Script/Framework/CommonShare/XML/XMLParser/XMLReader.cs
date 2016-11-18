@@ -41,7 +41,7 @@ public class XMLReader {
         UnityEngine.TextAsset textAsset = UnityEngine.Resources.Load<UnityEngine.TextAsset>(string.Format("Config/{0}", vPath));
         dic = GetRecordDic<KEY, VALUE>(textAsset.text);
 #else
-        string text = System.IO.File.ReadAllText(string.Format("Assets/Resources/Config/{0}.xml", vPath));
+        string text = System.IO.File.ReadAllText(string.Format(GameConfig.ConfigDir + "{0}.xml", vPath));
         dic = GetRecordDic<KEY, VALUE>(text);
 #endif
 
