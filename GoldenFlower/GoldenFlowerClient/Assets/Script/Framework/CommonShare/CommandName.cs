@@ -6,7 +6,8 @@ using System.Text;
 
 public enum CommandName
 {
-    MyCommandBase = 0,//没用的，但不要删除
+    //此字段服务器使用，客户端不要使用
+    MyCommandBase = 0,
     ECHO = 1,//一定要1开始
     ADD,
     MUTL

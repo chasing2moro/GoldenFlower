@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Xml;
-using UnityEngine;
 
 
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
@@ -15,7 +14,7 @@ public class XMLAttributeInt : XMLAttributeMember{
 		try {
 			return int.Parse(vElement.GetAttribute(vName));
 		} catch (Exception ex) {
-			Debug.Log("ex:" + ex.Message + " " + vName + " value:" + vElement.GetAttribute(vName));
+			Logger.Log("ex:" + ex.Message + " " + vName + " value:" + vElement.GetAttribute(vName));
 		}
 		return null;
 	}

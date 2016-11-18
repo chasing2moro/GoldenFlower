@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Xml;
 using System.Collections.Generic;
-
 
 public class XMLReader {
 	static List<T> GetRecordList<T>(string vXMLString) where T:XMLRecord, new(){
@@ -37,13 +35,17 @@ public class XMLReader {
     static Dictionary<string, object> _path2Dic;
     public static void CacheRecord<KEY, VALUE>(string vPath) where VALUE : XMLRecord, new()
     {
-#if true
+        Dictionary<KEY, VALUE> dic = null;
+#if UNITY_CLIENT
         //Unity
-        TextAsset textAsset = Resources.Load<TextAsset>(string.Format("Config/{0}", vPath));
-        Dictionary<KEY, VALUE> dic = GetRecordDic<KEY, VALUE>(textAsset.text);
+        UnityEngine.TextAsset textAsset = UnityEngine.Resources.Load<UnityEngine.TextAsset>(string.Format("Config/{0}", vPath));
+        dic = GetRecordDic<KEY, VALUE>(textAsset.text);
 #else
-
+        string text = System.IO.File.ReadAllText(string.Format("Assets/Resources/Config/{0}.xml", vPath));
+        dic = GetRecordDic<KEY, VALUE>(text);
 #endif
+
+
         if (_path2Dic == null)
             _path2Dic = new Dictionary<string, object>();
 
@@ -63,12 +65,12 @@ public class XMLReader {
             }
             else
             {
-                Debug.LogError("Can not Find path:" + vPath + " key:" + vKey);
+                Logger.LogError("Can not Find path:" + vPath + " key:" + vKey);
             }
         }
         else
         {
-            Debug.LogError("Can not Find path:" + vPath);
+            Logger.LogError("Can not Find path:" + vPath);
         }
 
 

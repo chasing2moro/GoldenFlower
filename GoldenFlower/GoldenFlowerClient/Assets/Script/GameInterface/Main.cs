@@ -32,11 +32,16 @@ public class Main : MonoBehaviour {
         Debug.Log((args[0] as defaultproto.account).name);
         return null;
     }
-    
-    [ContextMenu("sqlite")]
-    void Sqlite()
+
+    public RecordRecipe recordRecipe1;
+    public RecordRecipe recordRecipe2;
+    [ContextMenu("ReadXML")]
+    public void ReadXML()
     {
-     
+        UtilityProto.CacheAllRecord();
+
+        recordRecipe1 = UtilityProto.GetRecord<int, RecordRecipe>(RecordRecipe.GetConfigPath(), 2);
+        recordRecipe2 = UtilityProto.GetRecord<int, RecordRecipe>("recipe1", 5);
     }
 
 }
