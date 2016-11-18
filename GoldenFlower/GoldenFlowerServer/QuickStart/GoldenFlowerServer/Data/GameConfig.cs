@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-class GameConfig
+public class GameConfig
 {
-    public static string DataBasePath = "../Sqlite/goldenflower.db";
+    /// <summary>
+    /// 所有的 目录结尾都要 / 结束
+    /// </summary>
+    public static string RootDir = "../";
+    public static string DataBasePath = RootDir + "Sqlite/goldenflower.db";
+    public static string ConfigDir = RootDir + "Config/";
 }
 

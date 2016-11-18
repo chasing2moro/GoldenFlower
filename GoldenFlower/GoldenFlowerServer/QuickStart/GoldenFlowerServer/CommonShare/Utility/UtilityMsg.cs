@@ -12,8 +12,12 @@ public class UtilityMsg
     // 2个下划线开始，就是临时变量
     static string __header;
     static int __index;
- 
-    /// <param name="vCommandName">CommandName 枚举的 ToString()</param>
+
+    /// <summary>
+    /// 客户端：CommandName转成 Header（0001、0002、0003……）发出去
+    /// 服务器：根据Command类转成 Header 匹配到此CommandName，然后处理它
+    /// </summary>
+    /// <param name="vCommandName"></param>
     /// <returns></returns>
     public static string GetHeaderByCommandName(CommandName vCommandName)
     {
@@ -31,11 +35,11 @@ public class UtilityMsg
         return __header;
     }
 
-    public static string GetCommandNameByHeader(string vHeader)
+    public static CommandName GetCommandNameByHeader(string vHeader)
     {
         vHeader = vHeader.TrimStart('0');
         __index = int.Parse(vHeader);
-       return ((CommandName)__index).ToString();
+        return ((CommandName)__index);
     }
 }
 

@@ -68,7 +68,14 @@
     <Compile Include="Command\MUTL.cs" />
     <Compile Include="Command\MyCommandBase.cs" />
     <Compile Include="CommonShare\CommandName.cs" />
-    <Compile Include="CommonShare\UtilityMsg.cs" />
+    <Compile Include="CommonShare\Utility\Logger.cs" />
+    <Compile Include="CommonShare\Utility\UtilityMsg.cs" />
+    <Compile Include="CommonShare\Utility\UtilityProbuff.cs" />
+    <Compile Include="CommonShare\XML\Proto\UtilityProto.cs" />
+    <Compile Include="CommonShare\XML\Record\RecordRecipe.cs" />
+    <Compile Include="CommonShare\XML\XMLParser\XMLField.cs" />
+    <Compile Include="CommonShare\XML\XMLParser\XMLReader.cs" />
+    <Compile Include="CommonShare\XML\XMLParser\XMLRecord.cs" />
     <Compile Include="CustomProtocolServer.cs" />
     <Compile Include="CustomProtocolServerTest.cs" />
     <Compile Include="CustomProtocolSession.cs" />
@@ -79,7 +86,6 @@
     <Compile Include="MyReceiveFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CommonShare\UtilityProbuff.cs" />
     <Compile Include="SQLiteHelper\SQLiteColumn.cs" />
     <Compile Include="SQLiteHelper\SQLiteColumnList.cs" />
     <Compile Include="SQLiteHelper\SQLiteHelper.cs" />
@@ -114,7 +120,6 @@
       <Name>SuperSocket.SocketService.Net40</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
