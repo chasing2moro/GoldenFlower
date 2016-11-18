@@ -22,13 +22,17 @@ namespace SuperSocket.QuickStart.TelnetServer
 #if true
             Logger.Log("sqlite测试");
             UtilityDataBase.Instance.ConnectDatabase();
-            List<DatabaseServer> servers = UtilityDataBase.Instance.ReadFullTable<DatabaseServer>("config_net");
+            List<DatabaseServer> servers = UtilityDataBase.Instance.ReadFullTable<DatabaseServer>(DatabaseServer.GetTableName());
             foreach (var item in servers)
             {
                 Console.WriteLine(item.ip + " " + item.port);
             }
 
-            servers = UtilityDataBase.Instance.ReadTable<DatabaseServer>("config_net", new string[] { "ip", "port" }, new string[] { "port" }, new string[] { "=" }, new string[] { "900" });
+            servers = UtilityDataBase.Instance.ReadTable<DatabaseServer>(DatabaseServer.GetTableName(),
+                new string[] { "ip", "port" },
+                new string[] { "port" },
+                new string[] { "=" }, 
+                new string[] { "900" });
             foreach (var item in servers)
             {
                 Console.WriteLine(item.ip + " - " + item.port);
