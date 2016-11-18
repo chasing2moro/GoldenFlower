@@ -42,6 +42,16 @@ public class SocketManager : MonoBehaviour
     }
 
 
+    [ContextMenu("Register")]
+    void _Register()
+    {
+        defaultproto.register_acount vProto = new defaultproto.register_acount();
+        vProto.username = "bx1";
+        vProto.password = "123456";
+        SendMsg(CommandName.REGISTER_ACCOUNT, vProto);
+    }
+
+
     //defaultproto.example vProto = new defaultproto.example();
     //  vProto.name = VCommandName.ToString();
     //  vProto.field.Add(1);

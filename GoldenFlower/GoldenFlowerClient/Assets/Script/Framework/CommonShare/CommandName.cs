@@ -10,6 +10,7 @@ public enum CommandName
     MyCommandBase = 0,
     ECHO = 1,//一定要1开始
     ADD,
-    MUTL
+    MUTL,
+    REGISTER_ACCOUNT
 }
 
