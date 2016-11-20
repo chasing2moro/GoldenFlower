@@ -6,11 +6,12 @@ using System;
 
 public class SocketManager : MonoBehaviour
 {
+    public static SocketManager Instance;
     public SocketClient m_SocketClient;
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-
+        Instance = this;
     }
 
     // Update is called once per frame
@@ -19,37 +20,13 @@ public class SocketManager : MonoBehaviour
 
     }
 
-    [ContextMenu("Connect")]
-    void _connect()
-    {
-        string header = UtilityMsg.GetHeaderByCommandName(CommandName.ECHO);
-        Debug.Log("header:" + header);
 
+    public void Connect()
+    {
         m_SocketClient.Connect();
     }
 
-    public CommandName m_CommandName;
-    [ContextMenu("Send")]
-    void __send()
-    {
-        defaultproto.example vProto = new defaultproto.example();
-        vProto.name = m_CommandName.ToString();
-        vProto.field.Add(1);
-        vProto.field.Add(2);
-        vProto.gender = 1;
-        vProto.year = 30;
-        SendMsg(m_CommandName, vProto);
-    }
 
-
-    [ContextMenu("Register")]
-    void _Register()
-    {
-        defaultproto.register_acount vProto = new defaultproto.register_acount();
-        vProto.username = "bx1";
-        vProto.password = "123456";
-        SendMsg(CommandName.REGISTER_ACCOUNT, vProto);
-    }
 
 
     //defaultproto.example vProto = new defaultproto.example();

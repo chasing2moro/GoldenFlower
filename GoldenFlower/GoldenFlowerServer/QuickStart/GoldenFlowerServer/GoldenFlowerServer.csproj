@@ -64,7 +64,7 @@
     <Compile Include="Command\ECHO.cs" />
     <Compile Include="Command\MUTL.cs" />
     <Compile Include="Command\MyCommandBase.cs" />
-    <Compile Include="Command\REGISTER_ACCOUNT.cs" />
+    <Compile Include="Command\REGISTERACCOUNT.cs" />
     <Compile Include="CommonShare\CommandName.cs" />
     <Compile Include="CommonShare\Utility\Logger.cs" />
     <Compile Include="CommonShare\Utility\UtilityMsg.cs" />
@@ -91,6 +91,7 @@
     <Compile Include="SQLiteHelper\SQLiteHelper.cs" />
     <Compile Include="SQLiteHelper\SQLiteTable.cs" />
     <Compile Include="Utility\UtilityDataBase.cs" />
+    <Compile Include="Utility\UtilityMsgHandle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SuperSocket.SocketService.exe.config">

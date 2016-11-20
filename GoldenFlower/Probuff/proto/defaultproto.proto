@@ -1,0 +1,35 @@
+message example {
+  	optional string name = 1;
+  	repeated int32 field = 2;
+    optional int32 gender = 3;
+    optional int32 year = 4;
+  }
+
+  message account {
+  	optional string name = 1;
+  }
+
+//错误代码
+enum ErrorCode 
+{
+	//
+	None = 1;
+	//服务器内部错误
+	InternalError = 2;
+	//玩家账号已存在
+    UserNameExist = 3;
+    //密码长度不正确
+    PasswordLenNotCorrect  = 4;
+}
+
+//请求注册
+  message ReqRegisterAcount{
+     required  string username = 1;
+     required  string password = 2;
+  }
+
+  //返回注册
+  message RepRegisterAcount{
+     required ErrorCode errorCode = 1;
+     optional string errorDes = 2;
+  }
