@@ -22,14 +22,30 @@ enum ErrorCode
     PasswordLenNotCorrect  = 4;
 }
 
+message Result{
+	required ErrorCode errorCode = 1;
+    optional string errorDes = 2;
+}
+
 //请求注册
   message ReqRegisterAcount{
      required  string username = 1;
      required  string password = 2;
   }
-
   //返回注册
   message RepRegisterAcount{
-     required ErrorCode errorCode = 1;
-     optional string errorDes = 2;
+    required Result result = 1;
+    required int32 playerId = 2;
   }
+
+
+//请求登录
+  message ReqLogin{
+     required  string username = 1;
+     required  string password = 2;
+  }
+//返回登录
+message RepLogin{
+     required Result result = 1;
+     required int32 playerId = 3;
+}
