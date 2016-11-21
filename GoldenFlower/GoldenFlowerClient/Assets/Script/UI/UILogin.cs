@@ -45,11 +45,11 @@ public class UILogin : UIBase
 
     public void OnButtonLoginClicked()
     {
-        defaultproto.ReqRegisterAcount vProto = new defaultproto.ReqRegisterAcount();
+        defaultproto.ReqLogin vProto = new defaultproto.ReqLogin();
         vProto.username = m_InputFieldUserName.text.Trim();
         vProto.password = m_InputFieldPassword.text.Trim();
 
-        SocketManager.Instance.SendMsg(CommandName.REGISTERACCOUNT, vProto);
+        SocketManager.Instance.SendMsg(CommandName.LOGIN, vProto);
     }
 
 }

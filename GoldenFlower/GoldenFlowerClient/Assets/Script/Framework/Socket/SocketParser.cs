@@ -19,7 +19,8 @@ public class SocketParser
        {CommandName.ADD, typeof(defaultproto.account) },
        {CommandName.ECHO, typeof(defaultproto.account) },
        {CommandName.MUTL, typeof(defaultproto.account) },
-        {CommandName.REGISTERACCOUNT, typeof(defaultproto.RepRegisterAcount) },
+       {CommandName.REGISTERACCOUNT, typeof(defaultproto.RepRegisterAcount) },
+       {CommandName.LOGIN, typeof(defaultproto.RepLogin) },
    };
     public void Parser(byte[] vData)
     {
