@@ -33,7 +33,10 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             {
                 int result = UtilityDataBase.Instance.InsertValues<DataBaseUser>(DataBaseUser.GetTableName(), user_pool);
                 Logger.Log("注册有结果：" + result);
-  
+
+                //玩家id
+                repRegisterAcount_pool.playerId = user_pool.id;
+
                 UtilityMsgHandle.AssignErrorDes(repRegisterAcount_pool, defaultproto.ErrorCode.None);
             }
             catch (Exception e)

@@ -19,18 +19,37 @@ public class UILogin : UIBase
 
     void OnEnable()
     {
-        Facade.Instance.RegistCommand(CommandName.REGISTERACCOUNT, OnHandleCommand);
+        Facade.Instance.RegistCommand(CommandName.REGISTERACCOUNT, OnHandleCommandRegister);
+        Facade.Instance.RegistCommand(CommandName.LOGIN, OnHandleCommandLogin);
     }
 
     void OnDisable()
     {
-        Facade.Instance.RegistCommand(CommandName.REGISTERACCOUNT, OnHandleCommand);
+        Facade.Instance.UnRegistCommand(CommandName.REGISTERACCOUNT, OnHandleCommandRegister);
+        Facade.Instance.UnRegistCommand(CommandName.LOGIN, OnHandleCommandLogin);
     }
 
-    object OnHandleCommand(params object[] args)
+    object OnHandleCommandRegister(params object[] args)
     {
         defaultproto.RepRegisterAcount rep = args[0] as defaultproto.RepRegisterAcount;
         m_TextTips.text = "result:" + rep.result.errorCode + " : " + rep.result.errorDes;
+        if(rep.result.errorCode == defaultproto.ErrorCode.None)
+        {
+            DataManagerPlayer.Instance.m_UserName = m_InputFieldUserName.text.Trim();
+            DataManagerPlayer.Instance.m_PlayerId = rep.playerId;
+        }
+        return null;
+    }
+
+    object OnHandleCommandLogin(params object[] args)
+    {
+        defaultproto.RepLogin rep = args[0] as defaultproto.RepLogin;
+        m_TextTips.text = "result:" + rep.result.errorCode + " : " + rep.result.errorDes;
+        if (rep.result.errorCode == defaultproto.ErrorCode.None)
+        {
+            DataManagerPlayer.Instance.m_UserName = m_InputFieldUserName.text.Trim();
+            DataManagerPlayer.Instance.m_PlayerId = rep.playerId;
+        }
         return null;
     }
 

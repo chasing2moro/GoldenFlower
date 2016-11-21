@@ -23,7 +23,7 @@ public class DatabaseManger
         }
     }
 
-    public static bool IsUserExist(string vUserName, string vPassword)
+    public static bool IsUserExist(string vUserName, string vPassword, out int vUserId)
     {
         //玩家名字&密码是否正确
         List<DataBaseUser> dataBaseUser = UtilityDataBase.Instance.ReadTable<DataBaseUser>(DataBaseUser.GetTableName(),
@@ -32,10 +32,12 @@ public class DatabaseManger
             new string[] { vUserName, vPassword });
         if (dataBaseUser.IsNullOrEmpty())
         {
+            vUserId = 0;
             return false;
         }
         else
         {
+            vUserId = dataBaseUser[0].id;
             return true;
         }
     }

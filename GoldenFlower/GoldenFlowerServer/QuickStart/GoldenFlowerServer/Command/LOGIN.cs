@@ -24,7 +24,8 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             }
 
             //玩家名字&密码是否正确
-            if (!DatabaseManger.IsUserExist(req.username, req.password))
+            int userId;
+            if (!DatabaseManger.IsUserExist(req.username, req.password,out userId))
             {
                 UtilityMsgHandle.AssignErrorDes(repLogin_pool, defaultproto.ErrorCode.PasswordNotCorrect, "密码不正确");
                 //发送并回收
@@ -32,7 +33,7 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
                 return;
             }
 
-
+            repLogin_pool.playerId = userId;
             UtilityMsgHandle.AssignErrorDes(repLogin_pool, defaultproto.ErrorCode.None, "登陆成功");
             //发送并回收
             SessionSendWithRecycle<defaultproto.RepLogin>(session, repLogin_pool);
