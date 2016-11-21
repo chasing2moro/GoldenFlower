@@ -13,13 +13,17 @@ message example {
 enum ErrorCode 
 {
 	//
-	None = 1;
+	None = 0;
 	//服务器内部错误
-	InternalError = 2;
+	InternalError = 1;
 	//玩家账号已存在
-    UserNameExist = 3;
+    UserNameExist = 2;
     //密码长度不正确
-    PasswordLenNotCorrect  = 4;
+    PasswordLenNotCorrect  = 3;
+    //账号不正确
+    UserNameNotCorrect  = 4;
+    //密码不正确
+    PasswordNotCorrect  = 5;
 }
 
 message Result{
