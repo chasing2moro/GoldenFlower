@@ -21,12 +21,21 @@ public class SocketManager : MonoBehaviour
     }
 
 
+    [ContextMenu("Connect")]
     public void Connect()
     {
         m_SocketClient.Connect();
     }
 
+    [ContextMenu("Register")]
+     void OnButtonRegisterClicked()
+    {
+        defaultproto.ReqRegisterAcount vProto = new defaultproto.ReqRegisterAcount();
+        vProto.username = "123bx";
+        vProto.password = "123";
 
+        SocketManager.Instance.SendMsg(CommandName.REGISTERACCOUNT, vProto);
+    }
 
 
     //defaultproto.example vProto = new defaultproto.example();
@@ -35,7 +44,7 @@ public class SocketManager : MonoBehaviour
     //  vProto.field.Add(2);
     //  vProto.gender = 1;
     // vProto.year = 30;
-
+    string __strLog;
     /// <summary>
     /// 发送消息给服务器
     /// </summary>
@@ -43,34 +52,36 @@ public class SocketManager : MonoBehaviour
     /// <param name="vProto">Probuff</param>
     public void SendMsg(CommandName vCommandName, IExtensible vProto)
     {
+        __strLog = Newtonsoft.Json.JsonConvert.SerializeObject(vProto);
+        Logger.Log("<color=green>发送消息:</color>" + __strLog);
+
         System.IO.MemoryStream stream = new System.IO.MemoryStream();
 
         //包名
         byte[] backageName = Encoding.UTF8.GetBytes(UtilityMsg.GetHeaderByCommandName(vCommandName));
-        Debug.Log("包名 长度：" + backageName.Length);
+        __strLog = "包名 长度：" + backageName.Length;
         stream.Write(backageName, 0, backageName.Length);
 
         byte[] backageBody = UtilityProbuff.Serialize(vProto);
 
         //包体长
-        Debug.Log("包体Header 长度：" + 2);
+        __strLog += "包体Header 长度：" + 2;
         stream.Write(new byte[] { (byte)(backageBody.Length / 256), (byte)(backageBody.Length % 256) }, 0, 2);
 
         //包体
-        Debug.Log("包体 长度：" + backageBody.Length);
+        __strLog += "包体 长度：" + backageBody.Length;
         stream.Write(backageBody, 0, backageBody.Length);
 
         //stream 序列到 byte[]
         byte[] sendbyte = new byte[stream.Length];
         Array.Copy(stream.GetBuffer(), sendbyte, stream.Length);
 
-        Debug.Log("整包 长度：" + sendbyte.Length);
-        string str = "";
+        __strLog += "整包 长度：" + sendbyte.Length + "\n";
         for (int i = 0; i < sendbyte.Length; i++)
         {
-            str += "[" + i + "]:" + sendbyte[i];
+            __strLog += "[" + i + "]:" + sendbyte[i];
         }
-        Debug.Log("send" + str);
+        Debug.Log("send" + __strLog);
 
         m_SocketClient.Send(sendbyte);
     }

@@ -30,11 +30,20 @@ public class UILogin : UIBase
     object OnHandleCommand(params object[] args)
     {
         defaultproto.RepRegisterAcount rep = args[0] as defaultproto.RepRegisterAcount;
-        m_TextTips.text = "result:" + rep.errorCode + " : " + rep.errorDes;
+        m_TextTips.text = "result:" + rep.result.errorCode + " : " + rep.result.errorDes;
         return null;
     }
 
     public void OnButtonRegisterClicked()
+    {
+        defaultproto.ReqRegisterAcount vProto = new defaultproto.ReqRegisterAcount();
+        vProto.username = m_InputFieldUserName.text.Trim();
+        vProto.password = m_InputFieldPassword.text.Trim();
+
+        SocketManager.Instance.SendMsg(CommandName.REGISTERACCOUNT, vProto);
+    }
+
+    public void OnButtonLoginClicked()
     {
         defaultproto.ReqRegisterAcount vProto = new defaultproto.ReqRegisterAcount();
         vProto.username = m_InputFieldUserName.text.Trim();

@@ -11,5 +11,12 @@ public enum CommandName
     ECHO = 1,//一定要1开始
     ADD,
     MUTL,
-    REGISTERACCOUNT,//register account
+
+    /// <summary>
+    /// register account
+    /// req 
+    /// rep
+    /// </summary>
+    REGISTERACCOUNT
 }
+

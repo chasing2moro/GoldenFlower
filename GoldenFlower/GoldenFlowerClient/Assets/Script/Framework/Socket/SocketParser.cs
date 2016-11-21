@@ -39,8 +39,10 @@ public class SocketParser
         }
 
         object proto = UtilityProbuff.DeSerialize(__type, leftByte);
+
+        Logger.Log("<color=yellow>收到消息:</color>" + Newtonsoft.Json.JsonConvert.SerializeObject(proto));
         //Debug.Log(proto.ToString());
-        //
+     
         Facade.Instance.SendCommand(__commandName, proto);
     }
 }
