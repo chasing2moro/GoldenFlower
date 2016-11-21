@@ -47,5 +47,5 @@ message Result{
 //返回登录
 message RepLogin{
      required Result result = 1;
-     required int32 playerId = 3;
+     required int32 playerId = 2;
 }
