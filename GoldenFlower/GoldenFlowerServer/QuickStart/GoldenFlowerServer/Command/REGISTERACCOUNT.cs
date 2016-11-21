@@ -13,22 +13,21 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
 
             defaultproto.ReqRegisterAcount req = UtilityProbuff.DeSerialize<defaultproto.ReqRegisterAcount>(requestInfo.Body);
 
-            // 数据库读出去了
-            List<DataBaseUser> userList = UtilityDataBase.Instance.ReadFullTable<DataBaseUser>(DataBaseUser.GetTableName());
-
-            //名字重名
-            foreach (var item in userList)
+            //玩家名字是否重名
+            List<DataBaseUser> dataBaseUser = UtilityDataBase.Instance.ReadTable<DataBaseUser>(DataBaseUser.GetTableName(),
+                new string[] { "username" },
+                new string[] { "=" },
+                new string[] { req.username });
+            if (!dataBaseUser.IsNullOrEmpty())
             {
-                if(item.username == req.username)
-                {
-                    UtilityMsgHandle.AssignErrorDes(rep, defaultproto.ErrorCode.UserNameExist, "玩家名字已存在");
-                    //发送并回收
-                    SessionSendWithRecycle<defaultproto.RepRegisterAcount>(session, rep);
-                    return;
-                }
+                UtilityMsgHandle.AssignErrorDes(rep, defaultproto.ErrorCode.UserNameExist, "玩家名字已存在");
+                //发送并回收
+                SessionSendWithRecycle<defaultproto.RepRegisterAcount>(session, rep);
+                return;
             }
 
 
+            List<DataBaseUser> userList = UtilityDataBase.Instance.ReadFullTable<DataBaseUser>(DataBaseUser.GetTableName());
             DataBaseUser user = new DataBaseUser();
             user.id = userList.Count + 1;
             user.username = req.username;

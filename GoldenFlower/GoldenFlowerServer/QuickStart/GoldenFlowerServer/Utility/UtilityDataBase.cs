@@ -9,14 +9,14 @@ using System.Text;
 public class UtilityDataBase
 {
     static UtilityDataBase _instance;
+    public static void CreateInstance()
+    {
+        _instance = new UtilityDataBase();
+    }
     public static UtilityDataBase Instance
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = new UtilityDataBase();
-            }
             return _instance;
         }
     }
@@ -94,16 +94,17 @@ public class UtilityDataBase
     /// <param name="colValues">Col values.</param>
     public List<T> ReadTable<T>(
         string tableName,
-        string[] items,
+       // string[] items,
         string[] colNames,
         string[] operations,
         string[] colValues) where T:DatabaseRecord, new()
     {
-        string queryString = "SELECT " + items[0];
-        for (int i = 1; i < items.Length; i++)
-        {
-            queryString += ", " + items[i];
-        }
+        //string queryString = "SELECT " + items[0];
+        //for (int i = 1; i < items.Length; i++)
+        //{
+        //    queryString += ", " + items[i];
+        //}
+        string queryString = "SELECT *";
         queryString += " FROM " + tableName + " WHERE " + colNames[0] + " " + operations[0] + " " + colValues[0];
         for (int i = 1; i < colNames.Length; i++)
         {

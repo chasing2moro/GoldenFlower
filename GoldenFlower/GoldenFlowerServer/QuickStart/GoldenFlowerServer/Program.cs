@@ -19,6 +19,8 @@ namespace SuperSocket.QuickStart.TelnetServer
 
         static void Main(string[] args)
         {
+            //这行函数，一定要放这里
+            UtilityInterface.StartUp();
 #if true
             Logger.Log("sqlite测试");
             UtilityDataBase.Instance.ConnectDatabase();

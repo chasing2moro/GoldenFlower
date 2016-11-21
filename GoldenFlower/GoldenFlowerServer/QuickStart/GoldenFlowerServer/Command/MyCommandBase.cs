@@ -74,6 +74,8 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             //copy包体
             Array.Copy(byteBody, 0, byteSend, 4, byteBody.Length);
 
+           //放回缓存
+           UtilityObjectPool.Instance.EnqueueBytes(byteBody);
 
             Session.Send(byteSend, 0, byteSend.Length);
         }

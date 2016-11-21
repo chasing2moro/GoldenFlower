@@ -19,10 +19,14 @@ public class UtilityProbuff
 
     public static byte[] Serialize(IExtensible vProto)
     {
-        byte[] data;
+       
         System.IO.MemoryStream s1 = new System.IO.MemoryStream();
         GetSerializer().Serialize(s1, vProto);
-        data = new byte[s1.Length];
+
+        // data = new byte[s1.Length];
+        //从缓存拿
+        byte[] data = UtilityObjectPool.Instance.DequeueBytes((int)s1.Length);
+
         //不能直接使用s1.GetBuffer()，否则会因为数据包长度不正确而导致消息解析失败。
         Array.Copy(s1.GetBuffer(), data, s1.Length);
         return data;

@@ -67,6 +67,7 @@
     <Compile Include="Command\REGISTERACCOUNT.cs" />
     <Compile Include="CommonShare\CommandName.cs" />
     <Compile Include="CommonShare\Utility\Logger.cs" />
+    <Compile Include="CommonShare\Utility\UtilityInterface.cs" />
     <Compile Include="CommonShare\Utility\UtilityMsg.cs" />
     <Compile Include="CommonShare\Utility\UtilityObjectPool.cs" />
     <Compile Include="CommonShare\Utility\UtilityProbuff.cs" />
