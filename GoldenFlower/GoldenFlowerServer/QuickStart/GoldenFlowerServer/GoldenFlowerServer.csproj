@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Command\ADD.cs" />
     <Compile Include="Command\ECHO.cs" />
+    <Compile Include="Command\LOGIN.cs" />
     <Compile Include="Command\MUTL.cs" />
     <Compile Include="Command\MyCommandBase.cs" />
     <Compile Include="Command\REGISTERACCOUNT.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="CustomProtocolServerTest.cs" />
     <Compile Include="CustomProtocolSession.cs" />
     <Compile Include="Data\Database\Base\DatabaseField.cs" />
+    <Compile Include="Data\Database\Base\DatabaseManger.cs" />
     <Compile Include="Data\Database\Base\DatabaseRecord.cs" />
     <Compile Include="Data\Database\DatabaseServer.cs" />
     <Compile Include="Data\Database\DataBaseUser.cs" />

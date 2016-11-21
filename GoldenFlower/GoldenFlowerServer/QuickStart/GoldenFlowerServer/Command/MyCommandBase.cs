@@ -64,18 +64,18 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
         {
             //包头
             byte[] byteHeader = GetHeaderByte();
-            //包体
-            byte[] byteBody = UtilityProbuff.Serialize(vProto);
+            //包体（从对象池取出来的)
+            byte[] byteBody_pool = UtilityProbuff.Serialize(vProto);
 
             //总包
-            byte[] byteSend = new byte[byteBody.Length + byteHeader.Length];
+            byte[] byteSend = new byte[byteBody_pool.Length + byteHeader.Length];
             //coy包头
             Array.Copy(byteHeader, 0, byteSend, 0, 4);
             //copy包体
-            Array.Copy(byteBody, 0, byteSend, 4, byteBody.Length);
+            Array.Copy(byteBody_pool, 0, byteSend, 4, byteBody_pool.Length);
 
            //放回缓存
-           UtilityObjectPool.Instance.EnqueueBytes(byteBody);
+           UtilityObjectPool.Instance.EnqueueBytes(byteBody_pool);
 
             Session.Send(byteSend, 0, byteSend.Length);
         }

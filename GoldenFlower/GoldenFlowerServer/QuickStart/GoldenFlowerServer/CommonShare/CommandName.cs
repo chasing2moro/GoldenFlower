@@ -17,6 +17,13 @@ public enum CommandName
     /// req 
     /// rep
     /// </summary>
-    REGISTERACCOUNT
+    REGISTERACCOUNT,
+
+    /// <summary>
+    /// login account
+    /// req 
+    /// rep
+    /// </summary>
+    LOGIN,
 }
 
