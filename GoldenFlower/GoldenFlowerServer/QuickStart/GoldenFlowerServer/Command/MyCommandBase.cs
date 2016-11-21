@@ -77,5 +77,18 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
 
             Session.Send(byteSend, 0, byteSend.Length);
         }
+
+
+        /// <summary>
+        /// 封装过的发送接口，所有的发送都经过这里，要不然前端不识别
+        /// </summary>
+        /// <param name="Session"></param>
+        /// <param name="vProto"></param>
+        public void SessionSendWithRecycle<T>(CustomProtocolSession Session, T vProto) where T: IExtensible
+        {
+            SessionSend(Session, vProto);
+            //对象池回收
+            UtilityObjectPool.Instance.Enqueue<T>((T)vProto);
+        }
     }
 }
