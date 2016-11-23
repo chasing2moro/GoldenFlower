@@ -32,8 +32,8 @@ enum ErrorCode
 
 //资源那类型
 enum ResourceType{
-  Gold = 0;//金币
-  Diamond = 1;//钻石
+  Money = 0;//金币
+  Coin = 1;//钻石
 }
 
 enum CardType
@@ -41,7 +41,7 @@ enum CardType
     Diamond = 0;//方kuai
     Club = 1;//梅hua
     Heart = 2; //红xin
-    Spade = 3//黑tao
+    Spade = 3;//黑tao
 }
 
 
@@ -57,13 +57,9 @@ message Resource{
 
 message CardData{
     required CardType cardType = 1;
-    required int rank = 2;//1~13
+    required int32 rank = 2;//1~13
 }
 
-//玩家手上的卡牌
-message PlayerHandCard{
-  repeated CardData cardDatas;
-}
 
 ////////////////////////////////////////////////////////////////////////////
 // 协议对
@@ -120,5 +116,5 @@ message UpdateResource{
 
 //推送发卡牌
 message UpdateDealCard{
-  repeated PlayerHandCard playerHandCards = 1;
+   repeated CardData cardDatas = 1;
 }
