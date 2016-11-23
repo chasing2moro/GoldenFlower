@@ -61,11 +61,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Command\ADD.cs" />
+    <Compile Include="Command\BET.cs" />
     <Compile Include="Command\ECHO.cs" />
+    <Compile Include="Command\JOININBATTLE.cs" />
     <Compile Include="Command\LOGIN.cs" />
     <Compile Include="Command\MUTL.cs" />
     <Compile Include="Command\MyCommandBase.cs" />
     <Compile Include="Command\REGISTERACCOUNT.cs" />
+    <Compile Include="CommonShare\Battle\BattleController.cs" />
+    <Compile Include="CommonShare\Battle\EntityGambler.cs" />
+    <Compile Include="CommonShare\Battle\Card\CardBox.cs" />
+    <Compile Include="CommonShare\Battle\Card\CardData.cs" />
+    <Compile Include="CommonShare\Battle\Card\CardType.cs" />
+    <Compile Include="CommonShare\Battle\EntityBase.cs" />
+    <Compile Include="CommonShare\Battle\State\StateBase.cs" />
+    <Compile Include="CommonShare\Battle\State\StateBet.cs" />
+    <Compile Include="CommonShare\Battle\State\StateIdle.cs" />
+    <Compile Include="CommonShare\Battle\State\StateQuit.cs" />
+    <Compile Include="CommonShare\Battle\State\StateThink.cs" />
     <Compile Include="CommonShare\CommandName.cs" />
     <Compile Include="CommonShare\Utility\Logger.cs" />
     <Compile Include="CommonShare\Utility\UtilityInterface.cs" />
@@ -86,6 +99,7 @@
     <Compile Include="Data\Database\Base\DatabaseRecord.cs" />
     <Compile Include="Data\Database\DatabaseServer.cs" />
     <Compile Include="Data\Database\DataBaseUser.cs" />
+    <Compile Include="Data\DataManager\PlayerDataManager.cs" />
     <Compile Include="Data\GameConfig.cs" />
     <Compile Include="MyReceiveFilter.cs" />
     <Compile Include="Program.cs" />

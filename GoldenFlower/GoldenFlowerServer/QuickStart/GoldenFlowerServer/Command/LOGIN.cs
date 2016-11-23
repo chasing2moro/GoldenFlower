@@ -35,6 +35,10 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
 
             repLogin_pool.playerId = userId;
             UtilityMsgHandle.AssignErrorDes(repLogin_pool, defaultproto.ErrorCode.None, "登陆成功");
+
+            //缓存玩家
+            PlayerDataManager.Instance.AddPlayer(session, userId);
+
             //发送并回收
             SessionSendWithRecycle<defaultproto.RepLogin>(session, repLogin_pool);
         }

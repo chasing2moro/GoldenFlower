@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 public class UtilityObjectPool {
-     static UtilityObjectPool _instance;
+    static UtilityObjectPool _instance;
 
     public static void CreateInstance()
     {
@@ -20,7 +20,8 @@ public class UtilityObjectPool {
 
 
     Dictionary<Type, Queue> _type2InstanceQueue = new Dictionary<Type, Queue>();
-
+    object objectLock = new object();
+    object byteLock = new object();
     // Use this for initialization
     UtilityObjectPool()
     {
@@ -50,6 +51,11 @@ public class UtilityObjectPool {
     public void Enqueue<T>(T vInstance)
     {
         Queue queue = GetQueueByType(typeof(T));
+        if(queue.Count > 30)
+        {
+            //太多了，就不缓存了
+            return;
+        }
         queue.Enqueue(vInstance);
     }
 
@@ -57,13 +63,18 @@ public class UtilityObjectPool {
     {
         Queue queue = GetQueueByType(typeof(T));
         T instance;
-        if (queue.Count == 0)
+
+        //判断容器的大小是要锁住
+        lock (objectLock)
         {
-            instance = new T();
-        }
-        else
-        {
-            instance = (T)queue.Dequeue();
+            if (queue.Count == 0)
+            {
+                instance = new T();
+            }
+            else
+            {
+                instance = (T)queue.Dequeue();
+            }
         }
         return instance;
     }
@@ -83,13 +94,18 @@ public class UtilityObjectPool {
     public byte[] DequeueBytes(int vByteNum)
     {
         Queue<byte[]> bytesQueue = GetBytesQueue(vByteNum);
-        if (!bytesQueue.IsNullOrEmpty())
+
+        //判断容器的大小是要锁住
+        lock (byteLock)
         {
-            return bytesQueue.Dequeue();
-        }
-        else
-        {
-            return new byte[vByteNum];
+            if (!bytesQueue.IsNullOrEmpty())
+            {
+                return bytesQueue.Dequeue();
+            }
+            else
+            {
+                return new byte[vByteNum];
+            }
         }
     }
 

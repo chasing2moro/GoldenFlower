@@ -10,7 +10,8 @@ public class StateBet : StateBase
 {
     public override void OnEnterState()
     {
-        throw new NotImplementedException();
+        //投注完马上跳下一个状态
+        GetTarget<EntityGambler>().Idle();
     }
 }
 

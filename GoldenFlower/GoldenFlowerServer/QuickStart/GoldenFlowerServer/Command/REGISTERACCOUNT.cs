@@ -49,6 +49,9 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             //对象池回收
            UtilityObjectPool.Instance.Enqueue<DataBaseUser>(user_pool);
 
+            //缓存玩家
+            PlayerDataManager.Instance.AddPlayer(session, user_pool.id);
+
             //发送并回收
             SessionSendWithRecycle<defaultproto.RepRegisterAcount>(session, repRegisterAcount_pool);
         }

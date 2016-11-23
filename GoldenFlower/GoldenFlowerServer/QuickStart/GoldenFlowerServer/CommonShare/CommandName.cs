@@ -25,5 +25,20 @@ public enum CommandName
     /// rep
     /// </summary>
     LOGIN,
+
+
+    /// <summary>
+    /// join in battle
+    /// req 
+    /// rep
+    /// </summary>
+    JOININBATTLE,
+
+    /// <summary>
+    /// bet
+    /// req 
+    /// rep
+    /// </summary>
+    BET,
 }
 
