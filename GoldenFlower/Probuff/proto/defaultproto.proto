@@ -9,6 +9,10 @@ message example {
   	optional string name = 1;
   }
 
+
+////////////////////////////////////////////////////////////////////////////
+// 数据结构
+/////////////////////////////////////////////////////////////////////////////
 //错误代码
 enum ErrorCode 
 {
@@ -26,11 +30,44 @@ enum ErrorCode
     PasswordNotCorrect  = 5;
 }
 
+//资源那类型
+enum ResourceType{
+  Gold = 0;//金币
+  Diamond = 1;//钻石
+}
+
+enum CardType
+{
+    Diamond = 0;//方kuai
+    Club = 1;//梅hua
+    Heart = 2; //红xin
+    Spade = 3//黑tao
+}
+
+
 message Result{
 	required ErrorCode errorCode = 1;
     optional string errorDes = 2;
 }
 
+message Resource{
+    required ResourceType type = 1;
+    required int32 count = 2;
+}
+
+message CardData{
+    required CardType cardType = 1;
+    required int rank = 2;//1~13
+}
+
+//玩家手上的卡牌
+message PlayerHandCard{
+  repeated CardData cardDatas;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// 协议对
+/////////////////////////////////////////////////////////////////////////////
 //请求注册
   message ReqRegisterAcount{
      required  string username = 1;
@@ -52,4 +89,36 @@ message Result{
 message RepLogin{
      required Result result = 1;
      required int32 playerId = 2;
+}
+
+//请求进入战斗
+message ReqJoinBattle{
+    required int32 roomId = 1;//房间id
+}
+//返回进入战斗
+message RepJoinBattle{
+    required Result result = 1;
+}
+
+//请求下注
+message ReqBet{
+    required Resource resource = 1;//下注多少
+}
+//返回下注
+message RepBet{
+    required Result result = 1;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// 单向协议
+/////////////////////////////////////////////////////////////////////////////
+//资源变化(增加or扣减)
+message UpdateResource{
+    //资源列表
+    repeated Resource resource = 1;
+}
+
+//推送发卡牌
+message UpdateDealCard{
+  repeated PlayerHandCard playerHandCards = 1;
 }
