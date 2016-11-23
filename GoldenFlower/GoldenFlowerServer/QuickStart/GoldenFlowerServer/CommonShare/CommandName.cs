@@ -12,6 +12,7 @@ public enum CommandName
     ADD,
     MUTL,
 
+
     /// <summary>
     /// register account
     /// req 
@@ -40,5 +41,11 @@ public enum CommandName
     /// rep
     /// </summary>
     BET,
+
+
+    /// <summary>
+    /// update deal card
+    /// </summary>
+    UPDATEDEALCARD
 }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProtoBuf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -33,6 +34,44 @@ public class UtilityMsgHandle
        //PropertyInfo property = type.GetProperty("errorDes");
        // property.SetValue(vProto, vErrorDes, null);
 #endif
+    }
+
+
+    /// <summary>
+    /// 广播消息
+    /// </summary>
+    /// <param name="vCommandName"></param>
+    /// <param name="vProto"></param>
+    /// <param name="vPlayerIds"></param>
+    public static void BrocastMsgWithPlayerIds(CommandName vCommandName,  IExtensible vProto, params int[] vPlayerIds)
+    {
+        if (!vPlayerIds.IsNullOrEmpty())
+        {
+            for (int i = 0; i < vPlayerIds.Length; i++)
+            {
+                CustomProtocolSession session = PlayerDataManager.Instance.GetSession(vPlayerIds[i]);
+                if(session != null)
+                {
+                    session.SendProto(vCommandName, vProto);
+                }
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// 针对玩家id发消息
+    /// </summary>
+    /// <param name="vCommandName"></param>
+    /// <param name="vProto"></param>
+    /// <param name="vPlayerId"></param>
+    public static void SendMsgWithPlayerId(CommandName vCommandName, IExtensible vProto, int vPlayerId)
+    {
+        CustomProtocolSession session = PlayerDataManager.Instance.GetSession(vPlayerId);
+        if (session != null)
+        {
+            session.SendProto(vCommandName, vProto);
+        }
     }
 }
 

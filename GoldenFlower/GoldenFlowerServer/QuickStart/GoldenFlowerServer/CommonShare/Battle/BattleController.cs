@@ -25,7 +25,7 @@ public class BattleController
             RoundStart();
     }
 
-    EntityGambler GetPlayer(int vPlayerId)
+    EntityGambler GetEntityGambler(int vPlayerId)
     {
         EntityGambler entityGambler = null;
         foreach (var item in _entityGamblerList)
@@ -38,7 +38,12 @@ public class BattleController
         return entityGambler;
     }
 
-     void RoundStart()
+    public List<EntityGambler> GetEntityGamblers()
+    {
+        return _entityGamblerList;
+    }
+
+    void RoundStart()
     {
         CardBox.ReqDealCard(_entityGamblerList.Count, 3, this);
     }
@@ -81,7 +86,7 @@ public class BattleController
     public EntityGambler OnHandlePlayerBet(int vPalyerId)
     {
         //战场里找玩家
-        EntityGambler entityGambler = GetPlayer(vPalyerId);
+        EntityGambler entityGambler = GetEntityGambler(vPalyerId);
         if (entityGambler == null)
             return null;
 

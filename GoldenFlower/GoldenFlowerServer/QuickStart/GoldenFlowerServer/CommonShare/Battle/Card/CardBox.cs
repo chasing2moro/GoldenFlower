@@ -64,5 +64,17 @@ public static class CardBox
 
         //服务器直接处理，客户端需要等待发牌消息
         vRequester.OnHandleDealCard(list);
+#if UNITY_CLIENT
+        
+#endif
+        List<EntityGambler> entityGamblers = vRequester.GetEntityGamblers();
+        if (!entityGamblers.IsNullOrEmpty())
+        {
+            for (int i = 0; i < entityGamblers.Count; i++)
+            {
+                EntityGambler entityGambler = entityGamblers[i];
+#error 每个人发自己的牌，其他人的牌不要发
+            }
+        }
     }
 }

@@ -39,5 +39,12 @@ public class PlayerDataManager
         _session2PlayerId.TryGetValue(vSession, out __playerId);
         return __playerId;
     }
+
+    public CustomProtocolSession GetSession(int vPlayerId)
+    {
+        CustomProtocolSession session = null;
+        _playerId2Session.TryGetValue(vPlayerId, out session);
+        return session;
+    }
 }
 
