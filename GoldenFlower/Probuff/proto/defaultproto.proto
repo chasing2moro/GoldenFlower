@@ -91,18 +91,21 @@ message RepLogin{
 message ReqJoinBattle{
     required int32 roomId = 1;//房间id
 }
-//返回进入战斗
+//返回进入战斗(也有可能是人家进)
 message RepJoinBattle{
     required Result result = 1;
+    required int32 playerId = 2;
+    required int32 index = 3;
 }
 
 //请求下注
 message ReqBet{
-    required Resource resource = 1;//下注多少
+    required int32 count = 1;//下注多少
 }
 //返回下注
 message RepBet{
     required Result result = 1;
+    required int32 count = 2;//下注多少
 }
 
 ////////////////////////////////////////////////////////////////////////////
