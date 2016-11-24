@@ -29,6 +29,7 @@ public class UIManager : MonoBehaviour {
         }
         else
         {
+            ui.gameObject.name = vUIType.ToString();
             ui.transform.SetParent(m_UIRoot, false);
             ui.OnShow(vArgs);
         }

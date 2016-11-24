@@ -6,4 +6,5 @@ public enum UIType
     UILoading,
     UILogin,
     UIMain,
+    UIBattle,
 }

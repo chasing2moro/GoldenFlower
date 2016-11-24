@@ -53,30 +53,34 @@ public class SocketManager : MonoBehaviour
     public void SendMsg(CommandName vCommandName, IExtensible vProto)
     {
         __strLog = Newtonsoft.Json.JsonConvert.SerializeObject(vProto);
-        Logger.Log("<color=green>发送消息:</color>" + __strLog);
+        Logger.Log("<color=green>发送消息:</color>：" + vCommandName + "" + __strLog);
 
         System.IO.MemoryStream stream = new System.IO.MemoryStream();
 
         //包名
         byte[] backageName = Encoding.UTF8.GetBytes(UtilityMsg.GetHeaderByCommandName(vCommandName));
-        __strLog = "包名 长度：" + backageName.Length;
+        __strLog = "包名长度：" + backageName.Length;
         stream.Write(backageName, 0, backageName.Length);
 
-        byte[] backageBody = UtilityProbuff.Serialize(vProto);
+        if(vProto != null)
+        {
+            byte[] backageBody = UtilityProbuff.Serialize(vProto);
 
-        //包体长
-        __strLog += "包体Header 长度：" + 2;
-        stream.Write(new byte[] { (byte)(backageBody.Length / 256), (byte)(backageBody.Length % 256) }, 0, 2);
+            //包体长
+            __strLog += " 包体Header长度：" + 2;
+            stream.Write(new byte[] { (byte)(backageBody.Length / 256), (byte)(backageBody.Length % 256) }, 0, 2);
 
-        //包体
-        __strLog += "包体 长度：" + backageBody.Length;
-        stream.Write(backageBody, 0, backageBody.Length);
+            //包体
+            __strLog += " 包体长度：" + backageBody.Length;
+            stream.Write(backageBody, 0, backageBody.Length);
+        }
 
         //stream 序列到 byte[]
         byte[] sendbyte = new byte[stream.Length];
         Array.Copy(stream.GetBuffer(), sendbyte, stream.Length);
 
-        __strLog += "整包 长度：" + sendbyte.Length + "\n";
+
+        __strLog += " 整包长度：" + sendbyte.Length + "\n";
         for (int i = 0; i < sendbyte.Length; i++)
         {
             __strLog += "[" + i + "]:" + sendbyte[i];

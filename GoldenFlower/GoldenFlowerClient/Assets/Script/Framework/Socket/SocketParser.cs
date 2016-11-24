@@ -21,6 +21,8 @@ public class SocketParser
        {CommandName.MUTL, typeof(defaultproto.account) },
        {CommandName.REGISTERACCOUNT, typeof(defaultproto.RepRegisterAcount) },
        {CommandName.LOGIN, typeof(defaultproto.RepLogin) },
+       {CommandName.JOININBATTLE, typeof(defaultproto.RepJoinBattle) },
+       {CommandName.UPDATEDEALCARD, typeof(defaultproto.UpdateDealCard) },
    };
     public void Parser(byte[] vData)
     {
@@ -30,20 +32,30 @@ public class SocketParser
 
         //剩余的字节
         __leftLen = vData.Length - 4;
-        byte[] leftByte = new byte[__leftLen];
-        Array.Copy(vData, 4, leftByte, 0, __leftLen);
 
-
-        if (!_commandName2Type.TryGetValue(__commandName, out __type))
+        if(__leftLen > 0)
         {
-            Debug.LogError("找不到命令号:" + __commandName + "对应的proto buff");
+            byte[] leftByte = new byte[__leftLen];
+            Array.Copy(vData, 4, leftByte, 0, __leftLen);
+
+
+            if (!_commandName2Type.TryGetValue(__commandName, out __type))
+            {
+                Debug.LogError("找不到命令号:" + __commandName + "对应的proto buff");
+            }
+
+            object proto = UtilityProbuff.DeSerialize(__type, leftByte);
+
+            Logger.Log("<color=yellow>收到消息:</color>" + __commandName + ":" + Newtonsoft.Json.JsonConvert.SerializeObject(proto));
+            //Debug.Log(proto.ToString());
+
+            Facade.Instance.SendCommand(__commandName, proto);
+        }
+        else
+        {
+            Logger.Log("<color=yellow>收到没有包体的消息:</color>" + __commandName);
+            Facade.Instance.SendCommand(__commandName, null);
         }
 
-        object proto = UtilityProbuff.DeSerialize(__type, leftByte);
-
-        Logger.Log("<color=yellow>收到消息:</color>" + Newtonsoft.Json.JsonConvert.SerializeObject(proto));
-        //Debug.Log(proto.ToString());
-     
-        Facade.Instance.SendCommand(__commandName, proto);
     }
 }

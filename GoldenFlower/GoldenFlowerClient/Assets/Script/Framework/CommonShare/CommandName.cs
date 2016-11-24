@@ -12,6 +12,7 @@ public enum CommandName
     ADD,
     MUTL,
 
+
     /// <summary>
     /// register account
     /// req 
@@ -25,5 +26,31 @@ public enum CommandName
     /// rep
     /// </summary>
     LOGIN,
+
+
+    /// <summary>
+    /// join in battle
+    /// req 
+    /// rep
+    /// </summary>
+    JOININBATTLE,
+
+    /// <summary>
+    /// bet
+    /// req 
+    /// rep
+    /// </summary>
+    BET,
+
+
+    /// <summary>
+    /// update deal card
+    /// </summary>
+    UPDATEDEALCARD,
+
+    /// <summary>
+    /// update deal card finish
+    /// </summary>
+    UPDATEDEALCARDFISH,
 }
 
