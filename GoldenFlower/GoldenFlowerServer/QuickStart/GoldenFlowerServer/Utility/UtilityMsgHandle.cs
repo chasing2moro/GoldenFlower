@@ -47,13 +47,20 @@ public class UtilityMsgHandle
     {
         if (!vPlayerIds.IsNullOrEmpty())
         {
-            for (int i = 0; i < vPlayerIds.Length; i++)
+            foreach (var item in vPlayerIds)
             {
-                CustomProtocolSession session = PlayerDataManager.Instance.GetSession(vPlayerIds[i]);
-                if(session != null)
-                {
-                    session.SendProto(vCommandName, vProto);
-                }
+                SendMsgWithPlayerId(vCommandName, vProto, item);
+            }
+        }
+    }
+
+    public static void BrocastMsgWithEntityGamblers(CommandName vCommandName, IExtensible vProto, params EntityGambler[] vEntityGamblers)
+    {
+        if (!vEntityGamblers.IsNullOrEmpty())
+        {
+            foreach (var item in vEntityGamblers)
+            {
+                SendMsgWithPlayerId(vCommandName, vProto, item.GetPlayerId());
             }
         }
     }

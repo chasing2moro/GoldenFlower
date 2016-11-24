@@ -91,11 +91,8 @@ public static class CardBox
         vRequester.OnHandleDealCardFinish();
 
         //send msg to all client 
-        List<EntityGambler> entityGamblers = vRequester.GetEntityGamblers();
-        foreach (var entityGambler in entityGamblers)
-        {
-            UtilityMsgHandle.SendMsgWithPlayerId(CommandName.UPDATEDEALCARDFISH, null, entityGambler.GetPlayerId());
-        }
+        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEDEALCARDFISH, null, vRequester.GetEntityGamblers().ToArray());
+        
 
     }
 }

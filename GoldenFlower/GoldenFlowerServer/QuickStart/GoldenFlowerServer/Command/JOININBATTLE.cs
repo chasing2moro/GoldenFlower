@@ -19,11 +19,19 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
                 return;
             }
 
-            //添加进战斗
-            BattleController.Instance.OnHandleJoinBattle(playerId);
+            //自己进之前，已经有人了，所以也要告诉玩家
+            List<EntityGambler> entityGamblers = BattleController.Instance.GetEntityGamblers();
+            for (int i = 0; i < entityGamblers.Count; i++)
+            {
+                rep_pool.playerId = entityGamblers[i].GetPlayerId();
+                rep_pool.index = i;
+                UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None, "其他玩家已经加入");
+                SessionSend(session, rep_pool);
+            }
+            UtilityObjectPool.Instance.Enqueue<defaultproto.RepJoinBattle>(rep_pool);
 
-            UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None);
-            SessionSendWithRecycle<defaultproto.RepJoinBattle>(session, rep_pool);
+            //添加进战斗,并广播给其他人
+            BattleController.Instance.OnHandleJoinBattle(playerId);
 
             //临时代码 够3个人，就是开始
             List<EntityGambler> entityGamblerList = BattleController.Instance.GetEntityGamblers();

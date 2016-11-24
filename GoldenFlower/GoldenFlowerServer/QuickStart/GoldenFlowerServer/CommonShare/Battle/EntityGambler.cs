@@ -14,8 +14,8 @@ public class EntityGambler : EntityBase
      int _playerId;
     //card in hand
      List<CardData> _cardList = new List<CardData>();
-    //session for player communicate
-    public CustomProtocolSession m_Session;
+    ////session for player communicate
+    //public CustomProtocolSession m_Session;
 
     public void SetCardList(List<CardData> vCardDataList)
     {

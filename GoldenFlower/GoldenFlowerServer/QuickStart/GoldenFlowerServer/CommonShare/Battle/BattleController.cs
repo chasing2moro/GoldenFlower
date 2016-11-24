@@ -75,6 +75,15 @@ public class BattleController
     public void OnHandleJoinBattle(int vPlayerId)
     {
         AddPlayer(vPlayerId);
+
+        //广播给其他人
+#if !UNITY_CLIENT
+        defaultproto.RepJoinBattle rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.RepJoinBattle>();
+        rep_pool.playerId = vPlayerId;
+        rep_pool.index = _entityGamblerList.Count - 1;
+        UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None, "有人加入，广播给其他人");
+        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.JOININBATTLE, rep_pool, _entityGamblerList.ToArray());
+#endif
     }
 
     /// <summary>
@@ -82,13 +91,21 @@ public class BattleController
     /// </summary>
     /// <param name="vPalyerId"></param>
     /// <returns></returns>
-    public EntityGambler OnHandlePlayerBet(int vPalyerId)
+    public EntityGambler OnHandlePlayerBet(int vPalyerId, int vCount)
     {
         //战场里找玩家
         EntityGambler entityGambler = GetEntityGambler(vPalyerId);
         if (entityGambler == null)
             return null;
 
+#if !UNITY_CLIENT
+        #warning 扣除玩家的钱代码没有写
+        defaultproto.RepBet rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.RepBet>();
+        rep_pool.count = vCount;
+        UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None);
+        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.BET, rep_pool, _entityGamblerList.ToArray());
+        UtilityObjectPool.Instance.Enqueue<defaultproto.RepBet>(rep_pool);
+#endif
         //进入下一个状态
         entityGambler.Bet();
 
