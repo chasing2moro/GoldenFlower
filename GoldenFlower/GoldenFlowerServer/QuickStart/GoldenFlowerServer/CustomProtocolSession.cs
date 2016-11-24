@@ -42,18 +42,29 @@ public class CustomProtocolSession : AppSession<CustomProtocolSession, BinaryReq
     {
         //包头
         byte[] byteHeader = vByteHeader;
-        //包体（从对象池取出来的)
-        byte[] byteBody_pool = UtilityProbuff.Serialize(vProto);
 
         //总包
-        byte[] byteSend = new byte[byteBody_pool.Length + byteHeader.Length];
-        //coy包头
-        Array.Copy(byteHeader, 0, byteSend, 0, 4);
-        //copy包体
-        Array.Copy(byteBody_pool, 0, byteSend, 4, byteBody_pool.Length);
+        byte[] byteSend;
 
-        //放回缓存
-        UtilityObjectPool.Instance.EnqueueBytes(byteBody_pool);
+        if (vProto != null)
+        {
+            //包体（从对象池取出来的)
+            byte[] byteBody_pool = UtilityProbuff.Serialize(vProto);
+
+            //总包
+            byteSend = new byte[byteBody_pool.Length + byteHeader.Length];
+            //coy包头
+            Array.Copy(byteHeader, 0, byteSend, 0, 4);
+            //copy包体
+            Array.Copy(byteBody_pool, 0, byteSend, 4, byteBody_pool.Length);
+
+            //放回缓存
+            UtilityObjectPool.Instance.EnqueueBytes(byteBody_pool);
+        }
+        else
+        {
+            byteSend = byteHeader;
+        }
 
         Send(byteSend, 0, byteSend.Length);
     }

@@ -46,6 +46,11 @@ public enum CommandName
     /// <summary>
     /// update deal card
     /// </summary>
-    UPDATEDEALCARD
+    UPDATEDEALCARD,
+
+    /// <summary>
+    /// update deal card finish
+    /// </summary>
+    UPDATEDEALCARDFISH,
 }
 

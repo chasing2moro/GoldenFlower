@@ -19,10 +19,6 @@ public class BattleController
         gambler_pool.SetPlayerId(vPlayerId);
 
         _entityGamblerList.Add(gambler_pool);
-
-        //临时代码 够3个人，就是开始
-        if(_entityGamblerList.Count >= 3)
-            RoundStart();
     }
 
     EntityGambler GetEntityGambler(int vPlayerId)
@@ -43,17 +39,20 @@ public class BattleController
         return _entityGamblerList;
     }
 
-    void RoundStart()
+    /// <summary>
+    /// Rund start and send card
+    /// </summary>
+    public void RoundStart()
     {
         CardBox.ReqDealCard(_entityGamblerList.Count, 3, this);
     }
 
 
-     void Stop()
-    {
-        //第二轮重新开始
-        RoundStart();
-    }
+    // void Stop()
+    //{
+    //    //第二轮重新开始
+    //    RoundStart();
+    //}
 
     /// <summary>
     /// 轮到下一个人
@@ -100,22 +99,22 @@ public class BattleController
     }
 
     /// <summary>
-    /// 处理发牌
+    /// Handle send card to user
     /// </summary>
-    public void OnHandleDealCard(List<List<CardData>> vCardDatasList)
+    public EntityGambler OnHandleDealCard(List<CardData> vCardList, int vPlayerIndex)
     {
-        //send card
-        List<List<CardData>> cardDatasList = vCardDatasList;
-        for (int i = 0; i < cardDatasList.Count; i++)
-        {
-            //赋值玩家手上的牌
-            _entityGamblerList[i].m_CardList = cardDatasList[i];
-        }
+        EntityGambler entityGambler = _entityGamblerList[vPlayerIndex];
+        entityGambler.SetCardList(vCardList);
+        return entityGambler;
+    }
 
-        //赌徒索引重置
+    /// <summary>
+    /// Handle send card to user all finish
+    /// </summary>
+    public void OnHandleDealCardFinish()
+    {
         _curIndex = -1;
-
-        //发完牌第一个开始
+        // turn to the first one
         TurnNext();
     }
 }

@@ -20,6 +20,7 @@ using SuperSocket.SocketBase.Protocol;
 
         protected override BinaryRequestInfo ResolveRequestInfo(ArraySegment<byte> header, byte[] bodyBuffer, int offset, int length)
         {
+        //没有处理不发消息体bug
             return new BinaryRequestInfo(Encoding.UTF8.GetString(header.Array, header.Offset, 4), bodyBuffer.CloneRange(offset, length));
         }
     }

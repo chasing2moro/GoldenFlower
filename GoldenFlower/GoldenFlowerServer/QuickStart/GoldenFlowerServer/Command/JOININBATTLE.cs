@@ -24,6 +24,11 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
 
             UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None);
             SessionSendWithRecycle<defaultproto.RepJoinBattle>(session, rep_pool);
+
+            //临时代码 够3个人，就是开始
+            List<EntityGambler> entityGamblerList = BattleController.Instance.GetEntityGamblers();
+            if (!entityGamblerList.IsNullOrEmpty() && entityGamblerList.Count >= 3)
+                BattleController.Instance.RoundStart();
         }
     }
 }

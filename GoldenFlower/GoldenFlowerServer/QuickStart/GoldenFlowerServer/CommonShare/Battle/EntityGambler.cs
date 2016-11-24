@@ -13,17 +13,13 @@ public class EntityGambler : EntityBase
 {
      int _playerId;
     //card in hand
-    public List<CardData> m_CardList = new List<CardData>();
+     List<CardData> _cardList = new List<CardData>();
     //session for player communicate
     public CustomProtocolSession m_Session;
 
-    public void AddCard(CardData vCardData)
+    public void SetCardList(List<CardData> vCardDataList)
     {
-        m_CardList.Add(vCardData);
-    }
-    public void EmptyCard()
-    {
-        m_CardList.Clear();
+        _cardList = vCardDataList;
     }
 
     /// <summary>

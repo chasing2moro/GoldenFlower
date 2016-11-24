@@ -60,21 +60,42 @@ public static class CardBox
     /// <param name="vCardNum"></param>
     public static void ReqDealCard(int vPlayerNum, int vCardNum, BattleController vRequester)
     {
+#if UNITY_CLIENT
+        //客户端请求
+        return;
+#endif
         List<List<CardData>> list = DealCard(vPlayerNum, vCardNum);
 
-        //服务器直接处理，客户端需要等待发牌消息
-        vRequester.OnHandleDealCard(list);
-#if UNITY_CLIENT
-        
-#endif
-        List<EntityGambler> entityGamblers = vRequester.GetEntityGamblers();
-        if (!entityGamblers.IsNullOrEmpty())
+        defaultproto.UpdateDealCard rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.UpdateDealCard>();
+        for (int i = 0; i < vPlayerNum; i++)
         {
-            for (int i = 0; i < entityGamblers.Count; i++)
+            List<CardData> cardDatas = list[i];
+
+            //call  server's function
+            EntityGambler entityGambler = vRequester.OnHandleDealCard(cardDatas, i);
+
+            //send msg to client 
+            foreach (CardData item in cardDatas)
             {
-                EntityGambler entityGambler = entityGamblers[i];
-#error 每个人发自己的牌，其他人的牌不要发
+                defaultproto.CardData cardData = new defaultproto.CardData();
+                cardData.cardType = (defaultproto.CardType)item.m_CardType;
+                cardData.rank = item.m_Rank;
+                rep_pool.cardDatas.Add(cardData);
             }
+            UtilityMsgHandle.SendMsgWithPlayerId(CommandName.UPDATEDEALCARD, rep_pool, entityGambler.GetPlayerId());
+            rep_pool.cardDatas.Clear();
         }
+        UtilityObjectPool.Instance.Enqueue<defaultproto.UpdateDealCard>(rep_pool);
+
+        //call  server's function
+        vRequester.OnHandleDealCardFinish();
+
+        //send msg to all client 
+        List<EntityGambler> entityGamblers = vRequester.GetEntityGamblers();
+        foreach (var entityGambler in entityGamblers)
+        {
+            UtilityMsgHandle.SendMsgWithPlayerId(CommandName.UPDATEDEALCARDFISH, null, entityGambler.GetPlayerId());
+        }
+
     }
 }
