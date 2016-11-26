@@ -52,5 +52,10 @@ public enum CommandName
     /// update deal card finish
     /// </summary>
     UPDATEDEALCARDFISH,
+
+    /// <summary>
+    /// join in battle finsih
+    /// </summary>
+    UPDATEJOININBATTLEFINISH
 }
 

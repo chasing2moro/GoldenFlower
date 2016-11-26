@@ -9,42 +9,70 @@ public class BattleController
     //临时代码
     public static BattleController Instance = new BattleController();
 
-    List<EntityGambler> _entityGamblerList = new List<EntityGambler>();
+    Dictionary<int, EntityGambler> _id2EntityGambler = new Dictionary<int, EntityGambler>();
+
     int _curIndex = 0;
     EntityGambler _curGambler;
-     void AddPlayer(int vPlayerId)
+    EntityGambler AddPlayer(int vPlayerId, int vIndex)
     {
         EntityGambler gambler_pool = UtilityObjectPool.Instance.Dequeue<EntityGambler>();
         //玩家id
         gambler_pool.SetPlayerId(vPlayerId);
+        //位置
+        if (vIndex == -1)
+            gambler_pool.m_Index = _id2EntityGambler.Count;
+        else
+            gambler_pool.m_Index = vIndex;
 
-        _entityGamblerList.Add(gambler_pool);
+        _id2EntityGambler[vPlayerId] = gambler_pool;
+
+        return gambler_pool;
     }
 
     EntityGambler GetEntityGambler(int vPlayerId)
     {
         EntityGambler entityGambler = null;
-        foreach (var item in _entityGamblerList)
+       if( !_id2EntityGambler.TryGetValue(vPlayerId, out entityGambler))
         {
-            if(item.GetPlayerId() == vPlayerId)
-            {
-                entityGambler = item;
-            }
+            Logger.LogError("can not find player");
         }
         return entityGambler;
     }
 
-    public List<EntityGambler> GetEntityGamblers()
+    List<EntityGambler> _entityGamblerList;
+    public List<EntityGambler> EntityGamblerList
     {
-        return _entityGamblerList;
+        get
+        {
+            return  _entityGamblerList;
+        }
     }
 
+    public int EntityGamblerCount
+    {
+        get
+        {
+            return _id2EntityGambler.Count;
+        }
+    }
+
+    public Dictionary<int, EntityGambler> Id2EntityGambler
+    {
+        get
+        {
+            return _id2EntityGambler;
+        }
+    }
     /// <summary>
     /// Rund start and send card
     /// </summary>
-    public void RoundStart()
+    void RoundStart()
     {
-        CardBox.ReqDealCard(_entityGamblerList.Count, 3, this);
+        //构建List
+        _entityGamblerList = new List<EntityGambler>(_id2EntityGambler.Values);
+        _entityGamblerList.Sort((x, y) => x.m_Index - y.m_Index);
+
+        CardBox.ReqDealCard(EntityGamblerCount, 3, this);
     }
 
 
@@ -59,10 +87,10 @@ public class BattleController
     /// </summary>
     void TurnNext()
     {
-        _curIndex = ++_curIndex % _entityGamblerList.Count;
+        _curIndex = ++_curIndex % EntityGamblerCount;
 
         //轮到这个赌徒
-        _curGambler = _entityGamblerList[_curIndex];
+        _curGambler = EntityGamblerList[_curIndex];
 
         //思考再下注
         _curGambler.Think();
@@ -72,18 +100,36 @@ public class BattleController
     /// 处理玩家加入
     /// </summary>
     /// <param name="vPlayerId"></param>
-    public void OnHandleJoinBattle(int vPlayerId)
+    public void OnHandleJoinBattle(int vPlayerId, int vIndex = -1)
     {
-        AddPlayer(vPlayerId);
+        EntityGambler entityGambler = AddPlayer(vPlayerId, vIndex);
 
         //广播给其他人
 #if !UNITY_CLIENT
         defaultproto.RepJoinBattle rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.RepJoinBattle>();
         rep_pool.playerId = vPlayerId;
-        rep_pool.index = _entityGamblerList.Count - 1;
+        rep_pool.index = entityGambler.m_Index;
         UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None, "有人加入，广播给其他人");
-        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.JOININBATTLE, rep_pool, _entityGamblerList.ToArray());
+        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.JOININBATTLE, 
+            rep_pool,
+            _id2EntityGambler.Values.ToArray());
 #endif
+    }
+
+    /// <summary>
+    /// 处理玩家加入
+    /// </summary>
+    /// <param name="vPlayerId"></param>
+    public void OnHandleJoinBattleFinish()
+    {
+        //广播给其他人
+#if !UNITY_CLIENT
+        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEJOININBATTLEFINISH,
+            null, _id2EntityGambler.Values.ToArray());
+#endif
+
+        //告诉人家再发牌，此处要粘包发出去，要不然先后顺序出bug
+        RoundStart();
     }
 
     /// <summary>
@@ -99,11 +145,13 @@ public class BattleController
             return null;
 
 #if !UNITY_CLIENT
-        #warning 扣除玩家的钱代码没有写
+        //#warning 扣除玩家的钱代码没有写
         defaultproto.RepBet rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.RepBet>();
         rep_pool.count = vCount;
         UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None);
-        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.BET, rep_pool, _entityGamblerList.ToArray());
+        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.BET,
+            rep_pool,
+            _id2EntityGambler.Values.ToArray());
         UtilityObjectPool.Instance.Enqueue<defaultproto.RepBet>(rep_pool);
 #endif
         //进入下一个状态
@@ -120,7 +168,7 @@ public class BattleController
     /// </summary>
     public EntityGambler OnHandleDealCard(List<CardData> vCardList, int vPlayerIndex)
     {
-        EntityGambler entityGambler = _entityGamblerList[vPlayerIndex];
+        EntityGambler entityGambler = EntityGamblerList[vPlayerIndex];
         entityGambler.SetCardList(vCardList);
         return entityGambler;
     }

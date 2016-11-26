@@ -63,7 +63,7 @@ public static class CardBox
 #if UNITY_CLIENT
         //客户端请求
         return;
-#endif
+#else
         List<List<CardData>> list = DealCard(vPlayerNum, vCardNum);
 
         defaultproto.UpdateDealCard rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.UpdateDealCard>();
@@ -91,8 +91,8 @@ public static class CardBox
         vRequester.OnHandleDealCardFinish();
 
         //send msg to all client 
-        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEDEALCARDFISH, null, vRequester.GetEntityGamblers().ToArray());
-        
+        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEDEALCARDFISH, null, vRequester.Id2EntityGambler.Values.ToArray());
+#endif  
 
     }
 }

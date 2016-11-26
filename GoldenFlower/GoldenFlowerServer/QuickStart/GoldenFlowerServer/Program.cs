@@ -11,7 +11,7 @@ using SuperSocket.SocketEngine;
 using System.Data.SQLite;
 using System.Data;
 using System.IO;
-#warning 不能吧资源 / sqlite pdf删除
+//#warning 不能吧资源 / sqlite pdf删除
 namespace SuperSocket.QuickStart.TelnetServer
 {
     class Program
