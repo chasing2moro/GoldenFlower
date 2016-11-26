@@ -59,7 +59,7 @@ public class SocketManager : MonoBehaviour
 
         //包名
         byte[] backageName = Encoding.UTF8.GetBytes(UtilityMsg.GetHeaderByCommandName(vCommandName));
-        __strLog = "包名长度：" + backageName.Length;
+        //__strLog = "包名长度：" + backageName.Length;
         stream.Write(backageName, 0, backageName.Length);
 
         if(vProto != null)
@@ -67,11 +67,11 @@ public class SocketManager : MonoBehaviour
             byte[] backageBody = UtilityProbuff.Serialize(vProto);
 
             //包体长
-            __strLog += " 包体Header长度：" + 2;
+            //__strLog += " 包体Header长度：" + 2;
             stream.Write(new byte[] { (byte)(backageBody.Length / 256), (byte)(backageBody.Length % 256) }, 0, 2);
 
             //包体
-            __strLog += " 包体长度：" + backageBody.Length;
+            //__strLog += " 包体长度：" + backageBody.Length;
             stream.Write(backageBody, 0, backageBody.Length);
         }
 
@@ -79,13 +79,12 @@ public class SocketManager : MonoBehaviour
         byte[] sendbyte = new byte[stream.Length];
         Array.Copy(stream.GetBuffer(), sendbyte, stream.Length);
 
-
-        __strLog += " 整包长度：" + sendbyte.Length + "\n";
+        __strLog = "";
         for (int i = 0; i < sendbyte.Length; i++)
         {
-            __strLog += "[" + i + "]:" + sendbyte[i];
+            __strLog += " [" + i + ":" + sendbyte[i]+ "]";
         }
-        Debug.Log("send" + __strLog);
+        Debug.Log("send("+ sendbyte.Length+ ")" + __strLog);
 
         m_SocketClient.Send(sendbyte);
     }

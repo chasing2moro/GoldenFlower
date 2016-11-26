@@ -15,32 +15,15 @@ using UnityEngine;
  */
 public class SocketClient : MonoBehaviour
 {
-    
-    private Queue<byte[]> _recByteQueue;
     private SocketParser _parser;
     void Awake()
     {
-        _recByteQueue = new Queue<byte[]>();
         _parser = new SocketParser();
     }
 
     void Update()
     {
-        if(_recByteQueue.Count > 0)
-        {
-           byte[] recByte = _recByteQueue.Dequeue();
-
-#if true
-            string str = "";
-            for (int i = 0; i < recByte.Length; i++)
-            {
-                str += ":" + recByte[i];
-            }
-            Debug.Log("recv" + str);
-#endif
-            //解析网络byte
-            _parser.Parser(recByte);
-        }
+        _parser.OnUpdate();
     }
 
     public string m_IP = "127.0.0.1";
@@ -139,8 +122,17 @@ public class SocketClient : MonoBehaviour
                 byte[] trueByte = new byte[len];
                 Array.Copy(buf, trueByte, len);
 
-                //缓存起来
-                _recByteQueue.Enqueue(trueByte);
+#if true
+                string str = "";
+                for (int i = 0; i < trueByte.Length; i++)
+                {
+                    str += " [" + i + ":" + trueByte[i] + "]";
+                }
+                Debug.Log("recv(" + trueByte.Length + ")" + str);
+#endif
+
+                //线程里解析
+                _parser.ParserRawData(trueByte);
             }
 
 
