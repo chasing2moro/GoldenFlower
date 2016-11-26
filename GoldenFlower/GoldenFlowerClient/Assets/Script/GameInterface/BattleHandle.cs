@@ -72,7 +72,7 @@ public class BattleHandle : UnityEngine.MonoBehaviour
   
      object OnHandleBet(params object[] args)
     {
-        defaultproto.RepBet repBet = new defaultproto.RepBet();
+        defaultproto.RepBet repBet = args[0] as defaultproto.RepBet;
         BattleController.Instance.OnHandlePlayerBet(repBet.playerId, repBet.count);
         return null;
     }

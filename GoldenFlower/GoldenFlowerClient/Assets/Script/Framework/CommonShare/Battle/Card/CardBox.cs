@@ -91,7 +91,7 @@ public static class CardBox
         vRequester.OnHandleDealCardFinish();
 
         //send msg to all client 
-        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEDEALCARDFISH, null, vRequester.GetEntityGamblers().ToArray());
+        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEDEALCARDFISH, null, vRequester.Id2EntityGambler.Values.ToArray());
 #endif  
 
     }

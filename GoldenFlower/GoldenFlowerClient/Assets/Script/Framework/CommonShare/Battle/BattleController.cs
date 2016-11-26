@@ -122,13 +122,14 @@ public class BattleController
     /// <param name="vPlayerId"></param>
     public void OnHandleJoinBattleFinish()
     {
-        RoundStart();
-
         //广播给其他人
 #if !UNITY_CLIENT
         UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEJOININBATTLEFINISH,
             null, _id2EntityGambler.Values.ToArray());
 #endif
+
+        //告诉人家再发牌，此处要粘包发出去，要不然先后顺序出bug
+        RoundStart();
     }
 
     /// <summary>
@@ -141,12 +142,20 @@ public class BattleController
         //战场里找玩家
         EntityGambler entityGambler = GetEntityGambler(vPalyerId);
         if (entityGambler == null)
+        {
+            Logger.LogError("找不到：" + vPalyerId + " 这个玩家");
+            foreach (EntityGambler item in _id2EntityGambler.Values)
+            {
+                Logger.Log("你有这些玩家:" + item.GetPlayerId());
+            }
             return null;
+        }
 
 #if !UNITY_CLIENT
-        #warning 扣除玩家的钱代码没有写
+        //#warning 扣除玩家的钱代码没有写
         defaultproto.RepBet rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.RepBet>();
         rep_pool.count = vCount;
+        rep_pool.playerId = entityGambler.GetPlayerId();
         UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None);
         UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.BET,
             rep_pool,
