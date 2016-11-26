@@ -76,7 +76,7 @@ public class SocketClient : MonoBehaviour
     {
         try
         {
-            byte[] buf = new byte[0x1000];
+            byte[] buf = new byte[0x10000];
             this.recAsyncResult = socket.BeginReceive(buf, 0, 0x1000, SocketFlags.None, new AsyncCallback(this.OnRecv), buf);
         }
         catch (SocketException e)

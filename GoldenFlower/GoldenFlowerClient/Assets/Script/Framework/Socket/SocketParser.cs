@@ -21,6 +21,7 @@ public class SocketParser
        {CommandName.MUTL, typeof(defaultproto.account) },
        {CommandName.REGISTERACCOUNT, typeof(defaultproto.RepRegisterAcount) },
        {CommandName.LOGIN, typeof(defaultproto.RepLogin) },
+         {CommandName.BET, typeof(defaultproto.RepBet) },
        {CommandName.JOININBATTLE, typeof(defaultproto.RepJoinBattle) },
        {CommandName.UPDATEDEALCARD, typeof(defaultproto.UpdateDealCard) },
    };
