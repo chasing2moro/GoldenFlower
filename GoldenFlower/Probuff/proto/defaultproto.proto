@@ -106,6 +106,7 @@ message ReqBet{
 message RepBet{
     required Result result = 1;
     required int32 count = 2;//下注多少
+    required int32 playerId = 3;
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -120,4 +121,5 @@ message UpdateResource{
 //推送发卡牌
 message UpdateDealCard{
    repeated CardData cardDatas = 1;
+   required int32 index = 2;
 }
