@@ -87,6 +87,21 @@ public class BattleController
     }
 
     /// <summary>
+    /// 处理玩家加入
+    /// </summary>
+    /// <param name="vPlayerId"></param>
+    public void OnHandleJoinBattleFinish()
+    {
+        RoundStart();
+
+        //广播给其他人
+#if !UNITY_CLIENT
+        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEJOININBATTLEFINISH,
+            null, _entityGamblerList.ToArray());
+#endif
+    }
+
+    /// <summary>
     /// 处理玩家下注， 并返回处理了的玩家
     /// </summary>
     /// <param name="vPalyerId"></param>
