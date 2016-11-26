@@ -12,6 +12,7 @@ public class UtilityInterface
         UtilityObjectPool.CreateInstance();
 #if !UNITY_CLIENT
         UtilityDataBase.CreateInstance();
+        PlayerDataManager.CreateInstance();
 #endif
     }
 }

@@ -38,8 +38,7 @@ public class UILogin : UIBase
             DataManagerPlayer.Instance.m_UserName = m_InputFieldUserName.text.Trim();
             DataManagerPlayer.Instance.m_PlayerId = rep.playerId;
 
-            UIManager.Instance.HideUI(UIType.UILogin);
-            UIManager.Instance.ShowUI(UIType.UIBattle);
+            SceneManager.Instance.LoadScene(SceneType.Battle);
         }
         return null;
     }
@@ -53,8 +52,7 @@ public class UILogin : UIBase
             DataManagerPlayer.Instance.m_UserName = m_InputFieldUserName.text.Trim();
             DataManagerPlayer.Instance.m_PlayerId = rep.playerId;
 
-            UIManager.Instance.HideUI(UIType.UILogin);
-            UIManager.Instance.ShowUI(UIType.UIBattle);
+            SceneManager.Instance.LoadScene(SceneType.Battle);
         }
         return null;
     }

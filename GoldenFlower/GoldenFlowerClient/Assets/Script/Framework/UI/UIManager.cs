@@ -60,6 +60,15 @@ public class UIManager : MonoBehaviour {
         }
     }
 
+    public void HideAll()
+    {
+        UIBase[] uiBases = m_UIRoot.GetComponentsInChildren<UIBase>();
+        foreach (UIBase uiBase in uiBases)
+        {
+            GameObject.Destroy(uiBase.gameObject);
+        }
+    }
+
 	// Use this for initialization
 	void Start () {
 	
