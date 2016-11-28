@@ -28,6 +28,8 @@ enum ErrorCode
     UserNameNotCorrect  = 4;
     //密码不正确
     PasswordNotCorrect  = 5;
+    //非法操作
+    InvalidOperation = 6;
 }
 
 //资源那类型
