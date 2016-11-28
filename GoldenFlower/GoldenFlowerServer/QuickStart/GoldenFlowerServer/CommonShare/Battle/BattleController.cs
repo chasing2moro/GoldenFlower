@@ -63,6 +63,25 @@ public class BattleController
             return _id2EntityGambler;
         }
     }
+
+    public defaultproto.ErrorCode IsValidBetOperation(int vPlyaerId, out string vDes)
+    {
+        if(_curGambler == null)
+        {
+            vDes = "游戏还没开始";
+            return defaultproto.ErrorCode.InvalidOperation;
+        }
+
+        if(_curGambler.GetPlayerId() != vPlyaerId)
+        {
+            vDes = "还没轮到你，你就操作了,轮到:" + _curGambler.GetPlayerId();
+            return defaultproto.ErrorCode.InvalidOperation;
+        }
+
+        vDes = null;
+        return defaultproto.ErrorCode.None;
+    }
+
     /// <summary>
     /// Rund start and send card
     /// </summary>
@@ -74,13 +93,6 @@ public class BattleController
 
         CardBox.ReqDealCard(EntityGamblerCount, 3, this);
     }
-
-
-    // void Stop()
-    //{
-    //    //第二轮重新开始
-    //    RoundStart();
-    //}
 
     /// <summary>
     /// 轮到下一个人

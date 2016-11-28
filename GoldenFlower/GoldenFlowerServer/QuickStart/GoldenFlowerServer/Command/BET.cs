@@ -21,6 +21,17 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
                 return;
             }
 
+            //处理非法炒作（不是轮到他，他就下注的）
+            string vErrorDes;
+            defaultproto.ErrorCode errorCode = BattleController.Instance.IsValidBetOperation(playerId, out vErrorDes);
+            if (errorCode != defaultproto.ErrorCode.None)
+            {
+                defaultproto.RepBet rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.RepBet>();
+                UtilityMsgHandle.AssignErrorDes(rep_pool, errorCode, vErrorDes);
+                SessionSendWithRecycle<defaultproto.RepBet>(session, rep_pool);
+                return;
+            }
+
             //处理并返回处理了的玩家
             EntityGambler entityGambler = BattleController.Instance.OnHandlePlayerBet(playerId, req.count);
             if(entityGambler == null)
