@@ -67,6 +67,7 @@
     <Compile Include="Command\LOGIN.cs" />
     <Compile Include="Command\MUTL.cs" />
     <Compile Include="Command\MyCommandBase.cs" />
+    <Compile Include="Command\QUIT.cs" />
     <Compile Include="Command\REGISTERACCOUNT.cs" />
     <Compile Include="CommonShare\Battle\BattleController.cs" />
     <Compile Include="CommonShare\Battle\EntityGambler.cs" />

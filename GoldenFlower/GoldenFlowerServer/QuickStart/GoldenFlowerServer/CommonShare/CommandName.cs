@@ -42,6 +42,12 @@ public enum CommandName
     /// </summary>
     BET,
 
+    /// <summary>
+    /// Quit
+    /// req
+    /// rep
+    /// </summary>
+    QUIT,
 
     /// <summary>
     /// update deal card
@@ -56,6 +62,11 @@ public enum CommandName
     /// <summary>
     /// join in battle finsih
     /// </summary>
-    UPDATEJOININBATTLEFINISH
+    UPDATEJOININBATTLEFINISH,
+
+    /// <summary>
+    /// update round finish
+    /// </summary>
+    UPDATEROUNDFINISH, 
 }
 
