@@ -11,11 +11,10 @@ using System.Text;
 /// </summary>
 public class EntityGambler : EntityBase
 {
-
+    public FSMState m_State;
     //card in hand
      List<CardData> _cardList = new List<CardData>();
-    ////session for player communicate
-    //public CustomProtocolSession m_Session;
+
     public int m_Index;
     public void SetCardList(List<CardData> vCardDataList)
     {
@@ -46,24 +45,28 @@ public class EntityGambler : EntityBase
     //思考
     public void Think()
     {
+        m_State = FSMState.Think;
         _stateThink.OnEnterState();
     }
 
     //下注
     public void Bet()
     {
+        m_State = FSMState.Bet;
         _stateBet.OnEnterState();
     }
 
     //放弃
     public void Quit()
     {
+        m_State = FSMState.Quit;
         _stateQuit.OnEnterState();
     }
 
     //空闲
     public void Idle()
     {
+        m_State = FSMState.Idle;
         _stateIdle.OnEnterState();
     }
 }

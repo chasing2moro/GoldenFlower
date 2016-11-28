@@ -18,3 +18,10 @@ public abstract class StateBase
     }
 }
 
+public enum FSMState
+{
+    Idle,
+    Bet,
+    Quit,
+    Think
+}

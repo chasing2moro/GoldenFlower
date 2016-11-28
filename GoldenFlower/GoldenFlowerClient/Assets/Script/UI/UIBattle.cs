@@ -55,4 +55,9 @@ public class UIBattle : UIBase
         SocketManager.Instance.SendMsg(CommandName.BET, reqBet);
     }
 
+    public void OnButtonReqQuitClicked()
+    {
+        SocketManager.Instance.SendMsg(CommandName.QUIT, null);
+    }
+
 }

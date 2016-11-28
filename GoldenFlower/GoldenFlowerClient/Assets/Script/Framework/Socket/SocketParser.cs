@@ -17,14 +17,15 @@ public class SocketParser
     Type __type;//proto buff 类
     Dictionary<CommandName, Type> _commandName2Type = new Dictionary<CommandName, Type>()
    {
-       {CommandName.ADD, typeof(defaultproto.account) },
-       {CommandName.ECHO, typeof(defaultproto.account) },
-       {CommandName.MUTL, typeof(defaultproto.account) },
-       {CommandName.REGISTERACCOUNT, typeof(defaultproto.RepRegisterAcount) },
-       {CommandName.LOGIN, typeof(defaultproto.RepLogin) },
-         {CommandName.BET, typeof(defaultproto.RepBet) },
-       {CommandName.JOININBATTLE, typeof(defaultproto.RepJoinBattle) },
-       {CommandName.UPDATEDEALCARD, typeof(defaultproto.UpdateDealCard) },
+       {CommandName.ADD,                typeof(defaultproto.account) },
+       {CommandName.ECHO,               typeof(defaultproto.account) },
+       {CommandName.MUTL,               typeof(defaultproto.account) },
+       {CommandName.REGISTERACCOUNT,    typeof(defaultproto.RepRegisterAcount) },
+       {CommandName.LOGIN,              typeof(defaultproto.RepLogin) },
+       {CommandName.BET,                typeof(defaultproto.RepBet) },
+       {CommandName.JOININBATTLE,       typeof(defaultproto.RepJoinBattle) },
+       {CommandName.UPDATEDEALCARD,     typeof(defaultproto.UpdateDealCard) },
+       {CommandName.QUIT,               typeof(defaultproto.RepQuit) },
    };
 
     byte[] _leftBytes;//剩余没解析完的
