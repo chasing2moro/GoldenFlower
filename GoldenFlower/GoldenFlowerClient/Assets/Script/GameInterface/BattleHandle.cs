@@ -73,7 +73,15 @@ public class BattleHandle : UnityEngine.MonoBehaviour
      object OnHandleBet(params object[] args)
     {
         defaultproto.RepBet repBet = args[0] as defaultproto.RepBet;
-        BattleController.Instance.OnHandlePlayerBet(repBet.playerId, repBet.count);
+        if(repBet.result.errorCode == defaultproto.ErrorCode.None)
+        {
+            BattleController.Instance.OnHandlePlayerBet(repBet.playerId, repBet.count);
+        }
+        else
+        {
+            Logger.LogError("有错误，不能继续流程，请排除黑客操作");
+        }
+
         return null;
     }
 }

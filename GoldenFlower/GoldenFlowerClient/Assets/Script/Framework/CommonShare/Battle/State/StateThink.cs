@@ -9,12 +9,15 @@ public class StateThink : StateBase
     public override void OnEnterState()
     {
 #if UNITY_CLIENT
-        defaultproto.ReqBet reqBet = new defaultproto.ReqBet();
-        reqBet.count = 20;
-        SocketManager.Instance.SendMsg(CommandName.BET, reqBet);
+        if (DataManagerPlayer.Instance.IsMySelf(_target.GetPlayerId()))
+        {
+            Logger.Log("StateThink");
+        }
+        else
+        {
+            Logger.Log("StateThink:" + _target.GetPlayerId());
+        }
 #endif
-        //client 玩家需要请求下注
-        //socket 等待玩家下注网络请求
     }
 }
 

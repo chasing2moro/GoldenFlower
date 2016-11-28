@@ -13,5 +13,9 @@ public class DataManagerPlayer : DataManagerBase
     public int m_PlayerId;
     public string m_UserName;
 
+    public bool IsMySelf(int vPlayerId) {
+        return m_PlayerId == vPlayerId;
+    }
+
 }
 

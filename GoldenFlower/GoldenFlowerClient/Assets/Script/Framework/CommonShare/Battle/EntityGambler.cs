@@ -11,7 +11,7 @@ using System.Text;
 /// </summary>
 public class EntityGambler : EntityBase
 {
-     int _playerId;
+
     //card in hand
      List<CardData> _cardList = new List<CardData>();
     ////session for player communicate
@@ -36,11 +36,6 @@ public class EntityGambler : EntityBase
         _stateIdle.SetTarget(this);
         _stateQuit.SetTarget(this);
         _stateThink.SetTarget(this);
-    }
-
-    public int GetPlayerId()
-    {
-        return _playerId;
     }
 
     StateBet _stateBet = new StateBet();

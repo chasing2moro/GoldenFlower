@@ -8,7 +8,16 @@ public class StateIdle : StateBase
 {
     public override void OnEnterState()
     {
-        throw new NotImplementedException();
+#if UNITY_CLIENT
+        if (DataManagerPlayer.Instance.IsMySelf(_target.GetPlayerId()))
+        {
+            Logger.Log("StateIdle");
+        }
+        else
+        {
+            Logger.Log("StateIdle:" + _target.GetPlayerId());
+        }
+#endif
     }
 }
 

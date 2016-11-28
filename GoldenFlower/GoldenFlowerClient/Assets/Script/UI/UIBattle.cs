@@ -50,10 +50,9 @@ public class UIBattle : UIBase
 
     public void OnButtonReqBetClicked()
     {
-        defaultproto.ReqBet vProto = new defaultproto.ReqBet();
-        vProto.count = 2;
-
-        SocketManager.Instance.SendMsg(CommandName.BET, vProto);
+        defaultproto.ReqBet reqBet = new defaultproto.ReqBet();
+        reqBet.count = 20;
+        SocketManager.Instance.SendMsg(CommandName.BET, reqBet);
     }
 
 }
