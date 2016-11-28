@@ -111,6 +111,15 @@ message RepBet{
     required int32 playerId = 3;
 }
 
+//放弃,不跟
+//message ReqQuit{
+//}
+message RepQuit{
+    required Result result = 1;
+    required int32 playerId = 2;
+}
+
+
 ////////////////////////////////////////////////////////////////////////////
 // 单向协议
 /////////////////////////////////////////////////////////////////////////////
@@ -125,3 +134,9 @@ message UpdateDealCard{
    repeated CardData cardDatas = 1;
    required int32 index = 2;
 }
+
+
+//结束一轮， 其实发玩牌的协议，就是roundstart
+//message UpdateRoundFinish{
+//  required int32 winerPlayerId = 1;
+//}
