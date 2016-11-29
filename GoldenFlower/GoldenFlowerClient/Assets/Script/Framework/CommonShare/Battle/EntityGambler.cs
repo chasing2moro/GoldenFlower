@@ -69,5 +69,10 @@ public class EntityGambler : EntityBase
         m_State = FSMState.Idle;
         _stateIdle.OnEnterState();
     }
+
+    public void ClearState()
+    {
+        Idle();
+    }
 }
 

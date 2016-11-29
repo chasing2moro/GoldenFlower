@@ -23,7 +23,8 @@ public class BattleHandle : UnityEngine.MonoBehaviour
         Facade.Instance.RegistCommand(CommandName.UPDATEDEALCARD, OnHandleUpdateDealCard);
         Facade.Instance.RegistCommand(CommandName.UPDATEDEALCARDFISH, OnHandleUpdateDealCardFinish);
         Facade.Instance.RegistCommand(CommandName.BET, OnHandleBet);
-
+        Facade.Instance.RegistCommand(CommandName.QUIT, OnHandleQuit);
+        Facade.Instance.RegistCommand(CommandName.UPDATEROUNDFINISH, OnHandleUpdateRoundFinish);
     }
 
      void OnDisable()
@@ -33,6 +34,8 @@ public class BattleHandle : UnityEngine.MonoBehaviour
         Facade.Instance.UnRegistCommand(CommandName.UPDATEDEALCARD, OnHandleUpdateDealCard);
         Facade.Instance.UnRegistCommand(CommandName.UPDATEDEALCARDFISH, OnHandleUpdateDealCardFinish);
         Facade.Instance.UnRegistCommand(CommandName.BET, OnHandleBet);
+        Facade.Instance.UnRegistCommand(CommandName.QUIT, OnHandleQuit);
+        Facade.Instance.UnRegistCommand(CommandName.UPDATEROUNDFINISH, OnHandleUpdateRoundFinish);
     }
 
     object OnHandleJoinInBattle(params object[] args)
@@ -82,6 +85,26 @@ public class BattleHandle : UnityEngine.MonoBehaviour
             Logger.LogError("有错误，不能继续流程，请排除黑客操作");
         }
 
+        return null;
+    }
+
+    object OnHandleQuit(params object[] args)
+    {
+        defaultproto.RepQuit repBet = args[0] as defaultproto.RepQuit;
+        if (repBet.result.errorCode == defaultproto.ErrorCode.None)
+        {
+            BattleController.Instance.OnHandlePlayerQuit(repBet.playerId);
+        }
+        else
+        {
+            Logger.LogError("有错误，不能继续流程，请排除黑客操作");
+        }
+
+        return null;
+    }
+
+    object OnHandleUpdateRoundFinish(params object[] args)
+    {
         return null;
     }
 }
