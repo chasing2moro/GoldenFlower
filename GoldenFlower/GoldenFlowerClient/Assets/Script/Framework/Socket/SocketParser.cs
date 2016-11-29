@@ -34,6 +34,7 @@ public class SocketParser
     static int HeaderOffset = 4;
     //包头和包体长度
     static int HeaderAndBodyLenOffset = 6;
+
     public void ParserRawData(byte[] vRawData)
     {
 
@@ -141,5 +142,39 @@ public class SocketParser
             Facade.Instance.SendCommand(info.m_CommandName, info.m_Info);
             UtilityObjectPool.Instance.Enqueue<SendInfo>(info);
         }
+
+        if(_socketStateQueue.Count > 0)
+        {
+            SocketState state = _socketStateQueue.Dequeue();
+            switch (state)
+            {
+                case SocketState.None:
+                    break;
+                case SocketState.Connected:
+                    Facade.Instance.SendEvent(GameEvent.UI_ShowTip, "Net Connected");
+                    Facade.Instance.SendEvent(GameEvent.Socket_Connected);
+                    break;
+                case SocketState.Disconnected:
+                    Facade.Instance.SendEvent(GameEvent.UI_ShowTip, "Net Lost", 5.0f);
+                    Facade.Instance.SendEvent(GameEvent.Socket_Disconnected);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
+
+    //
+    private Queue<SocketState> _socketStateQueue = new Queue<SocketState>();
+    public void EnqueueSocketState(SocketState vSocketState)
+    {
+        _socketStateQueue.Enqueue(vSocketState);
+    }
+}
+
+public enum SocketState
+{
+    None,
+    Connected,
+    Disconnected
 }

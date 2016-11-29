@@ -95,6 +95,9 @@ public class SocketClient : MonoBehaviour
     private void OnConnected(IAsyncResult asyncConnect)
     {
         Debug.Log("connect success");
+
+        _parser.EnqueueSocketState(SocketState.Connected);
+
         //开始接收Socket消息
         Recv();
     }
@@ -163,6 +166,7 @@ public class SocketClient : MonoBehaviour
     public void Close(string vError = "default")
     {
         Debug.LogError("socket close" + vError);
+        _parser.EnqueueSocketState(SocketState.Disconnected);
         if (socket != null && socket.Connected)
         {
             socket.Shutdown(SocketShutdown.Both);

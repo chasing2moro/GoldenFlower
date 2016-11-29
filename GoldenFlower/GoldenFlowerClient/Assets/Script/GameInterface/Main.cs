@@ -2,17 +2,15 @@
 using System.Collections;
 
 public class Main : MonoBehaviour {
-
+    public GameObject RootTip;
     void Awake()
     {
         //注册所有单例
         UtilityInterface.StartUp();
-
-        //连接socket
-        SocketManager.Instance.Connect();
     }
 	// Use this for initialization
 	void Start () {
+        RootTip.SetActive(true);
         UIManager.Instance.ShowUI(UIType.UILogin);
 	}
 	
