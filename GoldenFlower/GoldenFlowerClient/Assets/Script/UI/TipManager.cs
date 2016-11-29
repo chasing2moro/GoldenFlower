@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class TipManager : MonoBehaviour {
     public Text m_TextTip;
+    public GameObject m_CommonTip;
+    public Text m_TextCommonTip;
 	// Use this for initialization
 	void Start () {
         m_TextTip.text = "";
@@ -21,12 +23,14 @@ public class TipManager : MonoBehaviour {
 
     void OnEnable()
     {
-        Facade.Instance.RegistEvent(GameEvent.UI_ShowTip, OnHandleShowTip);
+        Facade.Instance.RegistEvent(GameEvent.UI_ShowTinyTip, OnHandleShowTip);
+        Facade.Instance.RegistEvent(GameEvent.UI_ShowCommonTip, OnHandleShowTip);
     }
 
     void OnDisable()
     {
-        Facade.Instance.UnRegistEvent(GameEvent.UI_ShowTip, OnHandleShowTip);
+        Facade.Instance.UnRegistEvent(GameEvent.UI_ShowTinyTip, OnHandleShowTip);
+        Facade.Instance.UnRegistEvent(GameEvent.UI_ShowCommonTip, OnHandleShowTip);
     }
 
     object OnHandleShowTip(params object[] vArgs)
@@ -47,4 +51,27 @@ public class TipManager : MonoBehaviour {
     {
         m_TextTip.text = "";
     }
+
+    System.Action<TipButtonType> _buttonClickedCallBack;
+    object OnHandleShowCommonTip(params object[] vArgs)
+    {
+        m_CommonTip.SetActive(true);
+        m_TextCommonTip.text = vArgs[0] as string;
+        _buttonClickedCallBack = vArgs[1] as System.Action<TipButtonType>;
+        return null;
+    }
+
+    public void OnButtonClicked(int vIndex)
+    {
+        if (_buttonClickedCallBack != null)
+            _buttonClickedCallBack((TipButtonType)vIndex);
+
+        m_CommonTip.SetActive(false);
+    }
+}
+
+public enum TipButtonType
+{
+    Cancel,
+    Ok,
 }

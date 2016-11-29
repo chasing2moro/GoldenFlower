@@ -151,11 +151,11 @@ public class SocketParser
                 case SocketState.None:
                     break;
                 case SocketState.Connected:
-                    Facade.Instance.SendEvent(GameEvent.UI_ShowTip, "Net Connected");
+                    Facade.Instance.SendEvent(GameEvent.UI_ShowTinyTip, "Net Connected");
                     Facade.Instance.SendEvent(GameEvent.Socket_Connected);
                     break;
                 case SocketState.Disconnected:
-                    Facade.Instance.SendEvent(GameEvent.UI_ShowTip, "Net Lost", 5.0f);
+                    Facade.Instance.SendEvent(GameEvent.UI_ShowTinyTip, "Net Lost", 5.0f);
                     Facade.Instance.SendEvent(GameEvent.Socket_Disconnected);
                     break;
                 default:

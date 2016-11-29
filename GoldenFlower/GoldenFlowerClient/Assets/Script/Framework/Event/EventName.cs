@@ -5,7 +5,9 @@ public enum GameEvent
 {
     Socket_Connected,
     Socket_Disconnected,
-    UI_ShowTip,
-    UI_HitTip,
+    UI_ShowTinyTip,
+    UI_HitTinyTip,
+    UI_ShowCommonTip,
+    UI_HitCommonTip,
     Login
 }
