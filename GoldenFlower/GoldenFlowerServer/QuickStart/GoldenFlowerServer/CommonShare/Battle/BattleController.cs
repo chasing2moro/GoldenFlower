@@ -101,7 +101,7 @@ public class BattleController
         vPlayerId = 0;
         for (int i = 0; i < _entityGamblerList.Count; i++)
         {
-            if (_entityGamblerList[i].m_State == FSMState.Quit)
+            if (_entityGamblerList[i].m_State != FSMState.Quit)
             {
                 ++__num;
                 vPlayerId = _entityGamblerList[i].GetPlayerId();
@@ -110,11 +110,24 @@ public class BattleController
         return __num;
     }
 
+    //重置所有玩家状态
+    void ClearAllEntityGamblerState()
+    {
+        foreach (EntityGambler entityGambler in Id2EntityGambler.Values)
+        {
+            entityGambler.ClearState();
+        }
+    }
+
     /// <summary>
     /// Rund start and send card
     /// </summary>
     void RoundStart()
     {
+        //重置玩家状态
+        ClearAllEntityGamblerState();
+
+        //发牌
         CardBox.ReqDealCard(EntityGamblerCount, 3, this);
     }
 
@@ -127,7 +140,7 @@ public class BattleController
         //如果最后只有一个人存活，则比赛结束
         if (GetAliveOne(out __playerId) == 1)
         {
-            //广播给其他人
+            //游戏结束
             RoundFinish(__playerId);
             return;
         }
@@ -268,6 +281,17 @@ public class BattleController
     public void RoundFinish(int vWinPlayer)
     {
         Logger.Log("玩家：" + vWinPlayer + " 胜利了, 重新开始");
+
+//#if !UNITY_CLIENT
+//        defaultproto.UpdateRoundFinish rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.UpdateRoundFinish>();
+//        rep_pool.winerPlayerId = vWinPlayer;
+//        UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None);
+//        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEROUNDFINISH,
+//            rep_pool,
+//            _id2EntityGambler.Values.ToArray());
+//        UtilityObjectPool.Instance.Enqueue<defaultproto.UpdateRoundFinish>(rep_pool);
+//#endif
+
         RoundStart();
     }
 }
