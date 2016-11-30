@@ -155,7 +155,7 @@ public class SocketParser
                     Facade.Instance.SendEvent(GameEvent.Socket_Connected);
                     break;
                 case SocketState.Disconnected:
-                    Facade.Instance.SendEvent(GameEvent.UI_ShowTinyTip, "Net Lost", 5.0f);
+                    TipManager.Instance.ShowCommonTip( "Lost Net", (TipButtonType vType)=>{ SocketManager.Instance.Connect(); });
                     Facade.Instance.SendEvent(GameEvent.Socket_Disconnected);
                     break;
                 default:

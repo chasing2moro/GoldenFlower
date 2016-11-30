@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class TipManager : MonoBehaviour {
+    public static TipManager Instance;
+
     public Text m_TextTip;
     public GameObject m_CommonTip;
     public Text m_TextCommonTip;
@@ -18,19 +20,20 @@ public class TipManager : MonoBehaviour {
 
     void Awake()
     {
-
+        Instance = this;
+        m_CommonTip.SetActive(false);
     }
 
     void OnEnable()
     {
         Facade.Instance.RegistEvent(GameEvent.UI_ShowTinyTip, OnHandleShowTip);
-        Facade.Instance.RegistEvent(GameEvent.UI_ShowCommonTip, OnHandleShowTip);
+     //   Facade.Instance.RegistEvent(GameEvent.UI_ShowCommonTip, OnHandleShowCommonTip);
     }
 
     void OnDisable()
     {
         Facade.Instance.UnRegistEvent(GameEvent.UI_ShowTinyTip, OnHandleShowTip);
-        Facade.Instance.UnRegistEvent(GameEvent.UI_ShowCommonTip, OnHandleShowTip);
+     //   Facade.Instance.UnRegistEvent(GameEvent.UI_ShowCommonTip, OnHandleShowCommonTip);
     }
 
     object OnHandleShowTip(params object[] vArgs)
@@ -53,12 +56,12 @@ public class TipManager : MonoBehaviour {
     }
 
     System.Action<TipButtonType> _buttonClickedCallBack;
-    object OnHandleShowCommonTip(params object[] vArgs)
+    public void  ShowCommonTip(string vContent,
+    System.Action<TipButtonType> vCallBack)
     {
         m_CommonTip.SetActive(true);
-        m_TextCommonTip.text = vArgs[0] as string;
-        _buttonClickedCallBack = vArgs[1] as System.Action<TipButtonType>;
-        return null;
+        m_TextCommonTip.text = vContent;
+        _buttonClickedCallBack = vCallBack;
     }
 
     public void OnButtonClicked(int vIndex)

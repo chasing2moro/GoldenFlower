@@ -5,11 +5,19 @@ public class UIManager : MonoBehaviour {
     public static UIManager Instance;
 
     public Transform m_UIRoot;
+    public Transform m_TipRoot;
     public GameObject[] m_UIList;
+    public GameObject m_Tip;
    
     void Awake()
     {
         Instance = this;
+    }
+
+    public void ShowTip()
+    {
+        GameObject obj = Instantiate(m_Tip);
+        obj.transform.SetParent(m_TipRoot, false);
     }
 
     public UIBase ShowUI(UIType vUIType, params object[] vArgs)

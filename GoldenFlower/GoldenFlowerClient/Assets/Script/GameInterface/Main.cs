@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Main : MonoBehaviour {
-    public GameObject RootTip;
+
     void Awake()
     {
         //注册所有单例
@@ -10,7 +10,7 @@ public class Main : MonoBehaviour {
     }
 	// Use this for initialization
 	void Start () {
-        RootTip.SetActive(true);
+        UIManager.Instance.ShowTip();
         UIManager.Instance.ShowUI(UIType.UILogin);
 	}
 	
