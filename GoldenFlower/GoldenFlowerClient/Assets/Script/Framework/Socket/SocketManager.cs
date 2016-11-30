@@ -73,6 +73,10 @@ public class SocketManager : MonoBehaviour
             //包体
             //__strLog += " 包体长度：" + backageBody.Length;
             stream.Write(backageBody, 0, backageBody.Length);
+        }else
+        {
+            //包体长
+            stream.Write(new byte[] { 0, 0 }, 0, 2);
         }
 
         //stream 序列到 byte[]

@@ -58,7 +58,7 @@ public class UIBattle : UIBase
     public void OnButtonReqQuitClicked()
     {
         defaultproto.ReqQuit vProto = new defaultproto.ReqQuit();
-        SocketManager.Instance.SendMsg(CommandName.QUIT, vProto);
+        SocketManager.Instance.SendMsg(CommandName.QUIT, null);
     }
 
 }
