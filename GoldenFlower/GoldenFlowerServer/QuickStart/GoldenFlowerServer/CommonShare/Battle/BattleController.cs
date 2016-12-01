@@ -210,7 +210,7 @@ public class BattleController
         }
 
         //进入下一个状态
-        entityGambler.Bet();
+        entityGambler.Bet(vCount);
 
 
 #if !UNITY_CLIENT

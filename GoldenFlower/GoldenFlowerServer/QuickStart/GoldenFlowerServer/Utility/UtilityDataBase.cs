@@ -113,7 +113,17 @@ public class UtilityDataBase
 
 
         List<T> list = new List<T>();
-        DataTable dataTable = _sqliteHelper.Select(queryString);
+        DataTable dataTable = null;
+        try
+        {
+            dataTable = _sqliteHelper.Select(queryString);
+        }
+        catch (Exception)
+        {
+            //证明查不到
+            return list;
+        }
+
         foreach (DataRow dr in dataTable.Rows)
         {
             T database = new T();

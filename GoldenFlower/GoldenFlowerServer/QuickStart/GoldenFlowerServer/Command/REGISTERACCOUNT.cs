@@ -40,30 +40,32 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
                 Logger.Log("注册没结果 error:" + e.Message + " id:" + user_pool.id);
                 UtilityMsgHandle.AssignErrorDes(repRegisterAcount_pool, defaultproto.ErrorCode.InternalError, "can not insert user to table");
             }
-           UtilityObjectPool.Instance.Enqueue<DataBaseUser>(user_pool);
-            //send msg to client
+     
             SessionSendWithRecycle<defaultproto.RepRegisterAcount>(session, repRegisterAcount_pool);
 
             //add to the resource table
-            DataBaseReource resource_pool = UtilityObjectPool.Instance.Dequeue<DataBaseReource>();
             defaultproto.UpdateResource updateResource_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.UpdateResource>();
             try
             {
+                DataBaseReource resource_pool = UtilityObjectPool.Instance.Dequeue<DataBaseReource>();
+                resource_pool.userid = user_pool.id;
                 resource_pool.moneny = 100000;
                 resource_pool.coin = 20;
                 int result = UtilityDataBase.Instance.InsertValues<DataBaseReource>(DataBaseReource.GetTableName(), resource_pool);
-#error 1234
-                updateResource_pool.resource.Add()
+                UtilityObjectPool.Instance.Enqueue<DataBaseReource>(resource_pool);
+
+                defaultproto.Resource resource = new defaultproto.Resource();
+                updateResource_pool.resource.Add(resource);
                 UtilityMsgHandle.AssignErrorDes(updateResource_pool, defaultproto.ErrorCode.None);
             }
             catch (Exception)
             {
-
-                throw;
+                UtilityMsgHandle.AssignErrorDes(updateResource_pool, defaultproto.ErrorCode.InternalError, "insert to server error");
             }
-           UtilityObjectPool.Instance.Enqueue<DataBaseReource>(resource_pool);
-            //send msg to client
             SessionSendWithRecycle<defaultproto.UpdateResource>(session, updateResource_pool);
+
+
+            UtilityObjectPool.Instance.Enqueue<DataBaseUser>(user_pool);
 
             //缓存玩家
             PlayerDataManager.Instance.AddPlayer(session, user_pool.id);
