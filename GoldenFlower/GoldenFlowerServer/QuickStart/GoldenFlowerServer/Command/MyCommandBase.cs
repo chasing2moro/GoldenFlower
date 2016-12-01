@@ -1,4 +1,5 @@
 ﻿using ProtoBuf;
+using SuperSocket.Common;
 using SuperSocket.SocketBase.Command;
 using SuperSocket.SocketBase.Protocol;
 using System;
@@ -50,7 +51,24 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             return _headerByte;
         }
 
+        public int _tag;
         public override void ExecuteCommand(CustomProtocolSession session, BinaryRequestInfo requestInfo)
+        {
+            throw new NotImplementedException();
+
+            //4bytes 
+            _tag = UtilityByte.GetInt(requestInfo.Body);
+
+            // copy the rest as protobuff
+            if(requestInfo.Body.Length > 4)
+                OnExecuteCommand(session, requestInfo.Body.CloneRange(4, requestInfo.Body.Length - 4));
+            else
+                OnExecuteCommand(session, null);
+
+      
+        }
+
+        protected virtual void OnExecuteCommand(CustomProtocolSession session, byte[] vProtoByte)
         {
             throw new NotImplementedException();
         }

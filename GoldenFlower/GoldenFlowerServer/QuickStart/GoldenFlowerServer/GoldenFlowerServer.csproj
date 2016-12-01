@@ -81,6 +81,9 @@
     <Compile Include="CommonShare\Battle\State\StateQuit.cs" />
     <Compile Include="CommonShare\Battle\State\StateThink.cs" />
     <Compile Include="CommonShare\CommandName.cs" />
+    <Compile Include="CommonShare\Event\EventDispathcer.cs" />
+    <Compile Include="CommonShare\Event\EventName.cs" />
+    <Compile Include="CommonShare\Event\Facade.cs" />
     <Compile Include="CommonShare\Utility\Logger.cs" />
     <Compile Include="CommonShare\Utility\UtilityInterface.cs" />
     <Compile Include="CommonShare\Utility\UtilityMsg.cs" />
@@ -98,6 +101,7 @@
     <Compile Include="Data\Database\Base\DatabaseField.cs" />
     <Compile Include="Data\Database\Base\DatabaseManger.cs" />
     <Compile Include="Data\Database\Base\DatabaseRecord.cs" />
+    <Compile Include="Data\Database\DataBaseReource.cs" />
     <Compile Include="Data\Database\DatabaseServer.cs" />
     <Compile Include="Data\Database\DataBaseUser.cs" />
     <Compile Include="Data\DataManager\PlayerDataManager.cs" />
@@ -109,6 +113,7 @@
     <Compile Include="SQLiteHelper\SQLiteColumnList.cs" />
     <Compile Include="SQLiteHelper\SQLiteHelper.cs" />
     <Compile Include="SQLiteHelper\SQLiteTable.cs" />
+    <Compile Include="Utility\UtilityByte.cs" />
     <Compile Include="Utility\UtilityDataBase.cs" />
     <Compile Include="Utility\UtilityMsgHandle.cs" />
   </ItemGroup>

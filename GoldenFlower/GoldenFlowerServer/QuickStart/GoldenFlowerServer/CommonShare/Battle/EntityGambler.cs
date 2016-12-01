@@ -50,7 +50,7 @@ public class EntityGambler : EntityBase
     }
 
     //下注
-    public void Bet()
+    public void Bet(int vBetCount)
     {
         m_State = FSMState.Bet;
         _stateBet.OnEnterState();

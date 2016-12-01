@@ -4,11 +4,17 @@ using System.Linq;
 using System.Text;
 
 /// <summary>
-/// 下注
+/// State bet
 /// </summary>
 public class StateBet : StateBase
 {
     public override void OnEnterState()
+    {
+        //jump to idle state immediately
+        GetTarget<EntityGambler>().Idle();
+    }
+
+    public void OnEnterState(int vBetCount)
     {
 #if UNITY_CLIENT
         if (DataManagerPlayer.Instance.IsMySelf(_target.GetPlayerId()))
@@ -19,9 +25,11 @@ public class StateBet : StateBase
         {
             Logger.Log("StateBet:" + _target.GetPlayerId());
         }
+        Facade.Instance.SendEvent(GameEvent.Battle_EnterStateBet, _target.GetPlayerId(), vBetCount);
 #endif
-        //投注完马上跳下一个状态
-        GetTarget<EntityGambler>().Idle();
+        OnEnterState();
+
+
     }
 }
 

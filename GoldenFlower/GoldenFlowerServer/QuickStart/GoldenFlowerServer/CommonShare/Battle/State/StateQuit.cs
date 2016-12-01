@@ -19,7 +19,9 @@ public class StateQuit : StateBase
         {
             Logger.Log("StateQuit:" + _target.GetPlayerId());
         }
+        Facade.Instance.SendEvent(GameEvent.Battle_EnterStateQuit, _target.GetPlayerId());
 #endif
+
     }
 }
 
