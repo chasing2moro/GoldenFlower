@@ -105,6 +105,7 @@
     <Compile Include="Data\Database\DatabaseServer.cs" />
     <Compile Include="Data\Database\DataBaseUser.cs" />
     <Compile Include="Data\DataManager\PlayerDataManager.cs" />
+    <Compile Include="Data\DataManager\PlayerInfo.cs" />
     <Compile Include="Data\GameConfig.cs" />
     <Compile Include="MyReceiveFilter.cs" />
     <Compile Include="Program.cs" />

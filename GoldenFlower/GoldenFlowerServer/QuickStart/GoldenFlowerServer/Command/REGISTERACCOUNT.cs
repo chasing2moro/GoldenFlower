@@ -45,16 +45,17 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
 
             //add to the resource table
             defaultproto.UpdateResource updateResource_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.UpdateResource>();
+            //money
+            defaultproto.Resource resourceMoney = new defaultproto.Resource();
+            resourceMoney.type = defaultproto.ResourceType.Money;
+            resourceMoney.count = 2000;
+            //coin
+            defaultproto.Resource resourceCoin = new defaultproto.Resource();
+            resourceCoin.type = defaultproto.ResourceType.Coin;
+            resourceCoin.count = 20;
+
             try
             {
-                //money
-                defaultproto.Resource resourceMoney = new defaultproto.Resource();
-                resourceMoney.type = defaultproto.ResourceType.Money;
-                resourceMoney.count = 2000;
-                //coin
-                defaultproto.Resource resourceCoin = new defaultproto.Resource();
-                resourceCoin.type = defaultproto.ResourceType.Coin;
-                resourceCoin.count = 20;
                 //db
                 DataBaseReource resource_pool = UtilityObjectPool.Instance.Dequeue<DataBaseReource>();
                 resource_pool.userid = user_pool.id;
@@ -77,8 +78,8 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             UtilityObjectPool.Instance.Enqueue<defaultproto.UpdateResource>(updateResource_pool);
             //缓存玩家
             PlayerDataManager.Instance.AddPlayer(session, user_pool.id);
-
-
+            PlayerDataManager.Instance.SetMoneyRaw(user_pool.id, resourceMoney.count);
+            PlayerDataManager.Instance.SetCoinRaw(user_pool.id, resourceCoin.count);
             UtilityObjectPool.Instance.Enqueue<DataBaseUser>(user_pool);
 
 

@@ -39,8 +39,27 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             //缓存玩家
             PlayerDataManager.Instance.AddPlayer(session, userId);
 
+            //read resource table
+            DataBaseReource resource = DatabaseManger.GetUserResource(userId);
+            PlayerDataManager.Instance.SetMoneyRaw(userId, resource.moneny);
+            PlayerDataManager.Instance.SetCoinRaw(userId, resource.coin);
+            defaultproto.UpdateResource updateResource_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.UpdateResource>();
+            defaultproto.Resource resourceMoney = new defaultproto.Resource();
+            resourceMoney.type = defaultproto.ResourceType.Money;
+            resourceMoney.count = resource.moneny;
+            defaultproto.Resource resourceCoin = new defaultproto.Resource();
+            resourceCoin.type = defaultproto.ResourceType.Coin;
+            resourceCoin.count = resource.coin;
+            updateResource_pool.resource.Add(resourceMoney);
+            updateResource_pool.resource.Add(resourceCoin);
+
+
             //发送并回收
             SessionSendWithRecycle<defaultproto.RepLogin>(session, repLogin_pool);
+
+            session.SendProto(CommandName.UPDATERESOURCE, updateResource_pool);// send to user
+            updateResource_pool.resource.Clear();
+            UtilityObjectPool.Instance.Enqueue<defaultproto.UpdateResource>(updateResource_pool);
         }
     }
 }

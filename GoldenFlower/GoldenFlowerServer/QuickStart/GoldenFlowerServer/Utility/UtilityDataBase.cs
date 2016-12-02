@@ -134,6 +134,22 @@ public class UtilityDataBase
         return list;
     }
 
+    public T ReadTableFirst<T>(
+    string tableName,
+    string colName,
+    string operation,
+    string colValue) where T : DatabaseRecord, new()
+    {
+        List<T> dataBases = UtilityDataBase.Instance.ReadTable<T>(tableName,
+         new string[] { colName },
+         new string[] { operation },
+         new string[] { colValue });
+        if (dataBases.IsNullOrEmpty())
+            return null;
+        else
+            return dataBases[0];
+    }
+
 }
 
 

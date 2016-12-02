@@ -12,7 +12,7 @@ public class DatabaseManger
         List<DataBaseUser> dataBaseUser = UtilityDataBase.Instance.ReadTable<DataBaseUser>(DataBaseUser.GetTableName(),
             new string[] { "username" },
             new string[] { "=" },
-            new string[] { vUserName });
+            new string[] { "'" + vUserName + "'"});
         if (dataBaseUser.IsNullOrEmpty())
         {
             return false;
@@ -29,7 +29,7 @@ public class DatabaseManger
         List<DataBaseUser> dataBaseUser = UtilityDataBase.Instance.ReadTable<DataBaseUser>(DataBaseUser.GetTableName(),
             new string[] { "username", "password" },
             new string[] { "=", "=" },
-            new string[] { vUserName, vPassword });
+            new string[] { "'" + vUserName + "'", "'" + vPassword + "'"});
         if (dataBaseUser.IsNullOrEmpty())
         {
             vUserId = 0;
@@ -40,6 +40,15 @@ public class DatabaseManger
             vUserId = dataBaseUser[0].id;
             return true;
         }
+    }
+
+    public static DataBaseReource GetUserResource(int vPlayerId)
+    {
+        DataBaseReource dataBaseReource = UtilityDataBase.Instance.ReadTableFirst<DataBaseReource>(DataBaseReource.GetTableName(),
+                                            "userid",
+                                            "=",
+                                            vPlayerId.ToString());
+        return dataBaseReource;
     }
 }
 
