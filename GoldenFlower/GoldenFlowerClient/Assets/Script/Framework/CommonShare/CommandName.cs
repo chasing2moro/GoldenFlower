@@ -67,6 +67,11 @@ public enum CommandName
     /// <summary>
     /// update round finish
     /// </summary>
-    UPDATEROUNDFINISH, 
+    UPDATEROUNDFINISH,
+
+    /// <summary>
+    /// Update Resource
+    /// </summary>
+    UPDATERESOURCE
 }
 

@@ -79,7 +79,7 @@ public class SocketClient : MonoBehaviour
             if (!success)
             {
                 socket.Close();
-                Debug.Log("服务器不响应客户端消息，可能断网了");
+                Debug.Log("长时间 服务器不响应客户端消息，可能断网了");
             }
         }
         catch (SocketException e)

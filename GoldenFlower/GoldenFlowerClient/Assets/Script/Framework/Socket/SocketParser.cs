@@ -26,6 +26,7 @@ public class SocketParser
        {CommandName.JOININBATTLE,       typeof(defaultproto.RepJoinBattle) },
        {CommandName.UPDATEDEALCARD,     typeof(defaultproto.UpdateDealCard) },
        {CommandName.QUIT,               typeof(defaultproto.RepQuit) },
+       {CommandName.UPDATERESOURCE,     typeof(defaultproto.UpdateResource) },
    };
 
     byte[] _leftBytes;//剩余没解析完的
@@ -103,7 +104,17 @@ public class SocketParser
                 Debug.LogError("找不到命令号:" + __commandName + "对应的proto buff");
             }
 
-            object proto = UtilityProbuff.DeSerialize(__type, leftByte);
+            object proto = null;
+            try
+            {
+                 proto = UtilityProbuff.DeSerialize(__type, leftByte);
+            }
+            catch (Exception e)
+            {
+                Logger.LogError("解析proto 出错:" + e.Message + " commandName:" + __commandName);
+                throw;
+            }
+      
 
             Logger.Log("<color=yellow>收到消息:</color>" + __commandName + ":" + Newtonsoft.Json.JsonConvert.SerializeObject(proto));
             SendInfo sendInfo = UtilityObjectPool.Instance.Dequeue<SendInfo>();

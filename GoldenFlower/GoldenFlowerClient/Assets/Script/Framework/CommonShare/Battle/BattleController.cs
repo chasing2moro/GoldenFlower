@@ -210,7 +210,7 @@ public class BattleController
         }
 
         //进入下一个状态
-        entityGambler.Bet();
+        entityGambler.Bet(vCount);
 
 
 #if !UNITY_CLIENT
@@ -282,15 +282,15 @@ public class BattleController
     {
         Logger.Log("玩家：" + vWinPlayer + " 胜利了, 重新开始");
 
-#if !UNITY_CLIENT
-        defaultproto.UpdateRoundFinish rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.UpdateRoundFinish>();
-        rep_pool.winerPlayerId = vWinPlayer;
-        UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None);
-        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEROUNDFINISH,
-            rep_pool,
-            _id2EntityGambler.Values.ToArray());
-        UtilityObjectPool.Instance.Enqueue<defaultproto.UpdateRoundFinish>(rep_pool);
-#endif
+//#if !UNITY_CLIENT
+//        defaultproto.UpdateRoundFinish rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.UpdateRoundFinish>();
+//        rep_pool.winerPlayerId = vWinPlayer;
+//        UtilityMsgHandle.AssignErrorDes(rep_pool, defaultproto.ErrorCode.None);
+//        UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEROUNDFINISH,
+//            rep_pool,
+//            _id2EntityGambler.Values.ToArray());
+//        UtilityObjectPool.Instance.Enqueue<defaultproto.UpdateRoundFinish>(rep_pool);
+//#endif
 
         RoundStart();
     }

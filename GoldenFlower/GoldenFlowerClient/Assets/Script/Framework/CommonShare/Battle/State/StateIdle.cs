@@ -17,7 +17,9 @@ public class StateIdle : StateBase
         {
             Logger.Log("StateIdle:" + _target.GetPlayerId());
         }
+       Facade.Instance.SendEvent(GameEvent.Battle_EnterStateIdle, _target.GetPlayerId());
 #endif
+
     }
 }
 

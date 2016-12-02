@@ -17,7 +17,9 @@ public class StateThink : StateBase
         {
             Logger.Log("StateThink:" + _target.GetPlayerId());
         }
+        Facade.Instance.SendEvent(GameEvent.Battle_EnterStateThink, _target.GetPlayerId());
 #endif
+
     }
 }
 
