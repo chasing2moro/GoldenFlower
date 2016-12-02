@@ -12,4 +12,22 @@ public class MainHandle : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void OnEnable()
+    {
+        Facade.Instance.RegistCommand(CommandName.UPDATERESOURCE, OnHandleUpdateResource);
+    }
+
+    void OnDisable()
+    {
+        Facade.Instance.UnRegistCommand(CommandName.UPDATERESOURCE, OnHandleUpdateResource);
+    }
+
+    object OnHandleUpdateResource(params object[] args)
+    {
+        defaultproto.UpdateResource proto = args[0] as defaultproto.UpdateResource;
+        DataManagerPlayer.Instance.OnHandleUpdateResource(proto);
+
+        return null; 
+    }
 }

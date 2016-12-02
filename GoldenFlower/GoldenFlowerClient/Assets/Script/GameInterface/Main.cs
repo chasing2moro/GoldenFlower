@@ -12,6 +12,7 @@ public class Main : MonoBehaviour {
 	void Start () {
         UIManager.Instance.ShowTip();
         UIManager.Instance.ShowUI(UIType.UILogin);
+        this.gameObject.AddComponent<MainHandle>();
 	}
 	
 	// Update is called once per frame
