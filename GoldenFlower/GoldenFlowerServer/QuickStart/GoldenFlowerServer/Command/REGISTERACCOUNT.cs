@@ -47,28 +47,40 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             defaultproto.UpdateResource updateResource_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.UpdateResource>();
             try
             {
+                //money
+                defaultproto.Resource resourceMoney = new defaultproto.Resource();
+                resourceMoney.type = defaultproto.ResourceType.Money;
+                resourceMoney.count = 2000;
+                //coin
+                defaultproto.Resource resourceCoin = new defaultproto.Resource();
+                resourceCoin.type = defaultproto.ResourceType.Coin;
+                resourceCoin.count = 20;
+                //db
                 DataBaseReource resource_pool = UtilityObjectPool.Instance.Dequeue<DataBaseReource>();
                 resource_pool.userid = user_pool.id;
-                resource_pool.moneny = 100000;
-                resource_pool.coin = 20;
+                resource_pool.moneny = resourceMoney.count;
+                resource_pool.coin = resourceCoin.count;
                 int result = UtilityDataBase.Instance.InsertValues<DataBaseReource>(DataBaseReource.GetTableName(), resource_pool);
                 UtilityObjectPool.Instance.Enqueue<DataBaseReource>(resource_pool);
-
-                defaultproto.Resource resource = new defaultproto.Resource();
-                updateResource_pool.resource.Add(resource);
-                UtilityMsgHandle.AssignErrorDes(updateResource_pool, defaultproto.ErrorCode.None);
+                //protocol
+                updateResource_pool.resource.Add(resourceMoney);
+                updateResource_pool.resource.Add(resourceCoin);
+                //UtilityMsgHandle.AssignErrorDes(updateResource_pool, defaultproto.ErrorCode.None);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                UtilityMsgHandle.AssignErrorDes(updateResource_pool, defaultproto.ErrorCode.InternalError, "insert to server error");
+                Logger.LogError("insert to server error:" + e.Message);
+               // UtilityMsgHandle.AssignErrorDes(updateResource_pool, defaultproto.ErrorCode.InternalError, "insert to server error:" + e.Message);
             }
-            SessionSendWithRecycle<defaultproto.UpdateResource>(session, updateResource_pool);
+            session.SendProto(CommandName.UPDATERESOURCE, updateResource_pool);
+            updateResource_pool.resource.Clear();
+            UtilityObjectPool.Instance.Enqueue<defaultproto.UpdateResource>(updateResource_pool);
+            //缓存玩家
+            PlayerDataManager.Instance.AddPlayer(session, user_pool.id);
 
 
             UtilityObjectPool.Instance.Enqueue<DataBaseUser>(user_pool);
 
-            //缓存玩家
-            PlayerDataManager.Instance.AddPlayer(session, user_pool.id);
 
     
         }
