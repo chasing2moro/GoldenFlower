@@ -23,5 +23,6 @@ public enum FSMState
     Idle,
     Bet,
     Quit,
-    Think
+    Think,
+    Lose,
 }

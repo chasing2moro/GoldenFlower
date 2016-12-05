@@ -20,7 +20,7 @@ namespace SuperSocket.QuickStart.CustomProtocol.Command
             }
 
             //自己进之前，已经有人了，所以也要告诉玩家
-            Dictionary<int, EntityGambler> Id2EntityGambler = BattleController.Instance.Id2EntityGambler;
+            SortedDictionary<int, EntityGambler> Id2EntityGambler = BattleController.Instance.Id2EntityGambler;
             foreach (EntityGambler entityGambler in Id2EntityGambler.Values)
             {
                 rep_pool.playerId = entityGambler.GetPlayerId();

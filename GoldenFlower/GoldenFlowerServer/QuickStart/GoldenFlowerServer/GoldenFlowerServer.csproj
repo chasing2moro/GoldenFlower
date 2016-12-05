@@ -78,6 +78,7 @@
     <Compile Include="CommonShare\Battle\State\StateBase.cs" />
     <Compile Include="CommonShare\Battle\State\StateBet.cs" />
     <Compile Include="CommonShare\Battle\State\StateIdle.cs" />
+    <Compile Include="CommonShare\Battle\State\StateLose.cs" />
     <Compile Include="CommonShare\Battle\State\StateQuit.cs" />
     <Compile Include="CommonShare\Battle\State\StateThink.cs" />
     <Compile Include="CommonShare\CommandName.cs" />

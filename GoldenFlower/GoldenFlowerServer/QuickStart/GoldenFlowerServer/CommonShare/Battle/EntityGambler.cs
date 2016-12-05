@@ -16,6 +16,9 @@ public class EntityGambler : EntityBase
      List<CardData> _cardList = new List<CardData>();
 
     public int m_Index;
+
+    public EntityGambler m_Next;
+
     public void SetCardList(List<CardData> vCardDataList)
     {
         _cardList = vCardDataList;
@@ -35,12 +38,14 @@ public class EntityGambler : EntityBase
         _stateIdle.SetTarget(this);
         _stateQuit.SetTarget(this);
         _stateThink.SetTarget(this);
+        _stateLose.SetTarget(this);
     }
 
     StateBet _stateBet = new StateBet();
     StateIdle _stateIdle = new StateIdle();
     StateQuit _stateQuit = new StateQuit();
     StateThink _stateThink = new StateThink();
+    StateLose _stateLose = new StateLose();
 
     //思考
     public void Think()
@@ -68,6 +73,17 @@ public class EntityGambler : EntityBase
     {
         m_State = FSMState.Idle;
         _stateIdle.OnEnterState();
+    }
+
+    //失败
+    public void Lose()
+    {
+        m_State = FSMState.Lose;
+    }
+
+    public bool IsAlive()
+    {
+        return m_State != FSMState.Quit && m_State != FSMState.Lose;
     }
 
     public void ClearState()
