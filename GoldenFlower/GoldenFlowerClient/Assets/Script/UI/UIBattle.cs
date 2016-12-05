@@ -6,6 +6,10 @@ public class UIBattle : UIBase
 {
  
     public Text m_TextTips;
+    //玩家加入的预设
+    public GameObject m_StuffChar;
+
+    public Transform[] m_Pos;
     // Use this for initialization
     void Start () {
 
@@ -30,6 +34,21 @@ public class UIBattle : UIBase
 
     object OnHandleJoinInBattle(params object[] args)
     {
+        Transform spawnRoot = null;
+        foreach (Transform pos in m_Pos)
+        {
+            if(pos.transform.childCount == 0)
+            {
+                spawnRoot = pos;
+                break;
+            }
+        }
+        if (spawnRoot == null)
+            Debug.LogError("出错，找不到位置");
+
+        GameObject gameObject = Instantiate(m_StuffChar);
+        gameObject.transform.SetParent(spawnRoot, false);
+        gameObject.transform.localPosition = Vector3.zero;
 
         return null;
     }

@@ -9,6 +9,7 @@ public enum GameEvent
     Battle_EnterStateIdle,
     Battle_EnterStateQuit,
     Battle_EnterStateThink,
+    Battle_EnterStateLose,
 
     UI_ShowTinyTip,
     UI_HitTinyTip,

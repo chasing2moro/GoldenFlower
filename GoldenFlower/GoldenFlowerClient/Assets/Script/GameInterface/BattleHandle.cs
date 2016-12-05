@@ -63,7 +63,7 @@ public class BattleHandle : UnityEngine.MonoBehaviour
             cardData.m_Rank = updateDealCard.cardDatas[i].rank;
             cardList.Add(cardData);
         }
-        BattleController.Instance.OnHandleDealCard(cardList, updateDealCard.index);
+        BattleController.Instance.OnHandleDealCard(cardList);
         return null;
     }
     object OnHandleUpdateDealCardFinish(params object[] args)

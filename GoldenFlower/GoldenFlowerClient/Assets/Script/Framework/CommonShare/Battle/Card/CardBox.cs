@@ -72,7 +72,7 @@ public static class CardBox
             List<CardData> cardDatas = list[i];
 
             //call  server's function
-            EntityGambler entityGambler = vRequester.OnHandleDealCard(cardDatas, i);
+            EntityGambler entityGambler = vRequester.OnHandleDealCard(cardDatas);
 
             //send msg to client 
             foreach (CardData item in cardDatas)

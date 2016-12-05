@@ -9,10 +9,11 @@ public class BattleController
     //临时代码
     public static BattleController Instance = new BattleController();
 
-    Dictionary<int, EntityGambler> _id2EntityGambler = new Dictionary<int, EntityGambler>();
+    SortedDictionary<int, EntityGambler> _id2EntityGambler = new SortedDictionary<int, EntityGambler>();
+    SortedDictionary<int, EntityGambler>.Enumerator _id2EntityGamblerEnumerator;
 
-    int _curIndex = 0;
     EntityGambler _curGambler;
+    EntityGambler _previousGambler;
     EntityGambler AddPlayer(int vPlayerId, int vIndex)
     {
         EntityGambler gambler_pool = UtilityObjectPool.Instance.Dequeue<EntityGambler>();
@@ -39,14 +40,6 @@ public class BattleController
         return entityGambler;
     }
 
-    List<EntityGambler> _entityGamblerList;
-    public List<EntityGambler> EntityGamblerList
-    {
-        get
-        {
-            return  _entityGamblerList;
-        }
-    }
 
     public int EntityGamblerCount
     {
@@ -56,7 +49,7 @@ public class BattleController
         }
     }
 
-    public Dictionary<int, EntityGambler> Id2EntityGambler
+    public SortedDictionary<int, EntityGambler> Id2EntityGambler
     {
         get
         {
@@ -90,25 +83,26 @@ public class BattleController
         return defaultproto.ErrorCode.None;
     }
 
-    int __num;
-    /// <summary>
-    /// 获取生存人数
-    /// </summary>
-    /// <returns>返回所有生存的人数， 包含vPlayerId。 如果生存人数不等于1，则vPlayerId无效</returns>
-    public int GetAliveOne(out int vPlayerId)
-    {
-        __num = 0;
-        vPlayerId = 0;
-        for (int i = 0; i < _entityGamblerList.Count; i++)
-        {
-            if (_entityGamblerList[i].m_State != FSMState.Quit)
-            {
-                ++__num;
-                vPlayerId = _entityGamblerList[i].GetPlayerId();
-            }
-        }
-        return __num;
-    }
+    //int __num;
+    ///// <summary>
+    ///// 获取生存人数
+    ///// </summary>
+    ///// <returns>返回所有生存的人数， 包含vPlayerId。 如果生存人数不等于1，则vPlayerId无效</returns>
+    //public int GetAliveNum(out int vPlayerId)
+    //{
+    //    __num = 0;
+    //    vPlayerId = 0;
+    //    foreach (EntityGambler entityGambler in _id2EntityGambler.Values)
+    //    {
+    //        if (entityGambler.IsAlive())
+    //        {
+    //            ++__num;
+    //            vPlayerId = entityGambler.GetPlayerId();
+    //        }
+    //    }
+
+    //    return __num;
+    //}
 
     //重置所有玩家状态
     void ClearAllEntityGamblerState()
@@ -116,6 +110,7 @@ public class BattleController
         foreach (EntityGambler entityGambler in Id2EntityGambler.Values)
         {
             entityGambler.ClearState();
+            entityGambler.m_Next = null;
         }
     }
 
@@ -127,28 +122,49 @@ public class BattleController
         //重置玩家状态
         ClearAllEntityGamblerState();
 
-        //发牌
+        //获取枚举器,游标自动移到开头
+        _id2EntityGamblerEnumerator = _id2EntityGambler.GetEnumerator();
+
+        _previousGambler = null;
+        _curGambler = null;
+
+        //这里形成链
+        foreach (EntityGambler entityGambler in _id2EntityGambler.Values)
+        {
+            if (_curGambler != null)
+            {
+                _curGambler.m_Next = entityGambler;
+            }
+            _previousGambler = _curGambler;
+            _curGambler = entityGambler;
+        }
+        //在这里形成闭环
+        _curGambler.m_Next = _id2EntityGambler.First().Value;
+
+
+        //send card to user
         CardBox.ReqDealCard(EntityGamblerCount, 3, this);
     }
 
-    int __playerId;
     /// <summary>
     /// 轮到下一个人
     /// </summary>
     void TurnNext()
     {
         //如果最后只有一个人存活，则比赛结束
-        if (GetAliveOne(out __playerId) == 1)
+        if (_curGambler.m_Next == _curGambler)
         {
             //游戏结束
-            RoundFinish(__playerId);
+            RoundFinish(_curGambler.GetPlayerId());
             return;
         }
 
-        _curIndex = ++_curIndex % EntityGamblerCount;
+        //保存上一个玩家
+        if(_curGambler.IsAlive())
+            _previousGambler = _curGambler;
 
-        //轮到这个赌徒
-        _curGambler = EntityGamblerList[_curIndex];
+        //轮到这个玩家
+        _curGambler = _curGambler.m_Next;
 
         //思考再下注
         _curGambler.Think();
@@ -185,10 +201,6 @@ public class BattleController
         UtilityMsgHandle.BrocastMsgWithEntityGamblers(CommandName.UPDATEJOININBATTLEFINISH,
             null, _id2EntityGambler.Values.ToArray());
 #endif
-
-        //构建List
-        _entityGamblerList = new List<EntityGambler>(_id2EntityGambler.Values);
-        _entityGamblerList.Sort((x, y) => x.m_Index - y.m_Index);
 
         //告诉人家再发牌，此处要粘包发出去，要不然先后顺序出bug
         RoundStart();
@@ -240,8 +252,15 @@ public class BattleController
             return null;
         }
 
+        if(_curGambler != entityGambler)
+        {
+            Logger.LogError("还没轮到" + entityGambler.GetPlayerId());
+        }
+
         //Quit状态
         entityGambler.Quit();
+        //把自己从列表移除
+        _previousGambler.m_Next = _curGambler.m_Next;
 
 #if !UNITY_CLIENT
         defaultproto.RepQuit rep_pool = UtilityObjectPool.Instance.Dequeue<defaultproto.RepQuit>();
@@ -261,11 +280,19 @@ public class BattleController
     /// <summary>
     /// Handle send card to user
     /// </summary>
-    public EntityGambler OnHandleDealCard(List<CardData> vCardList, int vPlayerIndex)
+    public EntityGambler OnHandleDealCard(List<CardData> vCardList)
     {
-        EntityGambler entityGambler = EntityGamblerList[vPlayerIndex];
+#if UNITY_CLIENT
+        EntityGambler entityGambler = GetEntityGambler(DataManagerPlayer.Instance.m_PlayerId);
         entityGambler.SetCardList(vCardList);
         return entityGambler;
+#else
+        _previousGambler = _curGambler;
+        _curGambler.m_Next.SetCardList(vCardList);
+        _curGambler = _curGambler.m_Next;
+
+        return _curGambler;
+#endif
     }
 
     /// <summary>
@@ -273,7 +300,7 @@ public class BattleController
     /// </summary>
     public void OnHandleDealCardFinish()
     {
-        _curIndex = -1;
+    
         // turn to the first one
         TurnNext();
     }
