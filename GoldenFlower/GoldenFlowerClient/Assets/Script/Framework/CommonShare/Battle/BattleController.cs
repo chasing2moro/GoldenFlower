@@ -25,7 +25,7 @@ public class BattleController
         else
             gambler_pool.m_Index = vIndex;
 
-        _id2EntityGambler[vPlayerId] = gambler_pool;
+        _id2EntityGambler[gambler_pool.m_Index] = gambler_pool;
 
         return gambler_pool;
     }
@@ -33,9 +33,14 @@ public class BattleController
     EntityGambler GetEntityGambler(int vPlayerId)
     {
         EntityGambler entityGambler = null;
-       if( !_id2EntityGambler.TryGetValue(vPlayerId, out entityGambler))
+        foreach (var item in _id2EntityGambler.Values)
         {
-            Logger.LogError("can not find player");
+            if (item.GetPlayerId() == vPlayerId)
+            {
+                entityGambler = item;
+                break;
+            }
+            
         }
         return entityGambler;
     }
@@ -152,7 +157,7 @@ public class BattleController
     void TurnNext()
     {
         //如果最后只有一个人存活，则比赛结束
-        if (_curGambler.m_Next == _curGambler)
+        if (_previousGambler.m_Next == _previousGambler)
         {
             //游戏结束
             RoundFinish(_curGambler.GetPlayerId());
