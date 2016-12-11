@@ -58,7 +58,7 @@ public class EntityGambler : EntityBase
     public void Bet(int vBetCount)
     {
         m_State = FSMState.Bet;
-        _stateBet.OnEnterState();
+        _stateBet.OnEnterState(vBetCount);
     }
 
     //放弃
