@@ -11,7 +11,7 @@ public class Main : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         UIManager.Instance.ShowTip();
-        UIManager.Instance.ShowUI(UIType.UILogin);
+        UIManager.Instance.ShowUI<UILogin>();
         this.gameObject.AddComponent<MainHandle>();
 	}
 	

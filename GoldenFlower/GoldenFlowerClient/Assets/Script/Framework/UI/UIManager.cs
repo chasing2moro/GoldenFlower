@@ -20,24 +20,25 @@ public class UIManager : MonoBehaviour {
         obj.transform.SetParent(m_TipRoot, false);
     }
 
-    public UIBase ShowUI(UIType vUIType, params object[] vArgs)
+    public T ShowUI<T>(params object[] vArgs)  where T: UIBase
     {
-        UIBase ui = null;
+        T ui = null;
+        string uiName = typeof(T).ToString();
         foreach (GameObject uiBase in m_UIList)
         {
-            if(uiBase.name == vUIType.ToString())
+            if(uiBase.name == uiName)
             {
                 GameObject obj = Instantiate(uiBase);
-                ui = obj.GetComponent<UIBase>();
+                ui = obj.GetComponent<T>();
             }
         }
         if (ui == null)
         {
-            Debug.LogError("找不到UI：" + vUIType.ToString());
+            Debug.LogError("找不到UI：" + uiName);
         }
         else
         {
-            ui.gameObject.name = vUIType.ToString();
+            ui.gameObject.name = uiName;
             ui.transform.SetParent(m_UIRoot, false);
             ui.OnShow(vArgs);
         }
@@ -45,22 +46,24 @@ public class UIManager : MonoBehaviour {
         return ui;
     }
 
-    public void HideUI(UIType vUIType)
+    public void HideUI<T>()
     {
         UIBase[] uiBases = m_UIRoot.GetComponentsInChildren<UIBase>();
 
         UIBase ui = null;
+        string uiName = typeof(T).ToString();
         foreach (UIBase uiBase in uiBases)
         {
-            if(uiBase.gameObject.name == vUIType.ToString())
+            if(uiBase.gameObject.name == uiName)
             {
                 ui = uiBase;
+                break;
             }
         }
 
         if (ui == null)
         {
-            Debug.LogError("关闭时 找不到UI：" + vUIType.ToString());
+            Debug.LogError("关闭时 找不到UI：" + uiName);
         }
         else
         {

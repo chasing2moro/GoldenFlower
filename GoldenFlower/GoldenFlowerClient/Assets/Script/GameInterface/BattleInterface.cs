@@ -6,7 +6,7 @@ public class BattleInterface : InterfaceBase
 
 	// Use this for initialization
 	void Start () {
-        UIManager.Instance.ShowUI(UIType.UIBattle);
+        UIManager.Instance.ShowUI<UIBattle>();
 	}
 	
 	// Update is called once per frame
